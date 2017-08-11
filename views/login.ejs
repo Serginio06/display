@@ -1,0 +1,52 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+    <!--<meta charset="UTF-8">-->
+    <!--&lt;!&ndash; Latest compiled and minified CSS &ndash;&gt;-->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"-->
+          <!--integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+
+    <!--&lt;!&ndash; Optional theme &ndash;&gt;-->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"-->
+          <!--integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">-->
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
+
+    <!--&lt;!&ndash; Latest compiled and minified JavaScript &ndash;&gt;-->
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"-->
+            <!--integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"-->
+            <!--crossorigin="anonymous"></script>-->
+<%- include('./head.ejs') %>
+    <link rel="stylesheet" href="./views/login.css">
+    <script src="./views/login.js"></script>
+    <title>Add Item</title>
+</head>
+
+<body>
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Login form</div>
+        <div class="panel-body">
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon">Username</span>
+                    <input type="text" class="form-control" id="loginInput">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon">Password</span>
+                    <input type="password" class="form-control" id="passInput">
+                </div>
+            </div>
+            <div class="alert alert-danger alertMsgUp" role="alert" id="alert-msg"></div>
+            <div class="alert alert-info alertMsgUp" role="alert" id="info-msg"></div>
+
+            <div class="form-group">
+                <a class="btn btn-success" onclick="signUp()">Sign up</a>
+                <a class="btn btn-success" onclick="login()">Log in</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
