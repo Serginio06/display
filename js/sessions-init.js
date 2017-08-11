@@ -6,11 +6,11 @@ const session = require('express-session');
 const mySQL = require('express-mysql-session')(session);
 
 const mySessionStore = new mySQL({
-    host:'localhost',
+    host:'35.187.178.187',
     port:'3306',
     user:'root',
     password:'123456',
-    database:'newschema',
+    database:'display-db',
     checkExpiratinInterval: 900000, // check every 15 min
     // expiration: 86400000 // 24h
     expiration: 60000 // 1 min
