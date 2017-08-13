@@ -4,17 +4,23 @@
 
 const session = require('express-session');
 const mySQL = require('express-mysql-session')(session);
+const config = require ('./../config');
 
-const mySessionStore = new mySQL({
-    host:'35.187.178.187',
-    port:'3306',
-    user:'root',
-    password:'123456',
-    database:'display-db',
-    checkExpiratinInterval: 900000, // check every 15 min
-    // expiration: 86400000 // 24h
-    expiration: 60000 // 1 min
-});
+
+
+const mySessionStore = new mySQL(Object.assign(config.db_params,{checkExpiratinInterval: 30000},{expiration: 60000}));
+
+
+//     {
+//     host:'35.187.178.187',
+//     port:'3306',
+//     user:'root',
+//     password:'123456',
+//     database:'display-db',
+//     checkExpiratinInterval: 900000, // check every 15 min
+//     // expiration: 86400000 // 24h
+//     expiration: 60000 // 1 min
+// });
 
 
 module.exports = function (app) {

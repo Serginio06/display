@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const config = require ('./config')(app);
+const config = require ('./config');
 var bodyParser = require('body-parser');
 
 
@@ -11,6 +11,7 @@ app.use(bodyParser.json());
 require('./js/sessions-init')(app);
 
 app.use('/views', express.static(__dirname + '/views'));
+app.use('/assets', express.static(__dirname + '/assets'));
 
 app.set('views','./views');
 app.set('view engine','ejs');
@@ -23,9 +24,10 @@ app.use(function (req,res,next) {
     res.status(404).render('error');
 });
 
-app.listen(config.get('port'), function (err) {
+app.listen(config.port, function (err) {
     
     if ( err ) console.log('err on server start. Error: ', err.stack);
     
     console.log('Server is running');
 });
+

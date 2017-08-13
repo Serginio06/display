@@ -1,0 +1,18 @@
+.alertMsgUp, .alertMsgDown {
+    /*width: 0;*/
+    height: 0;
+    overflow: hidden;
+    padding: 0 15px;
+    border: 0;
+    -webkit-transition: all 0.8s linear;
+    -moz-transition: all 0.8s linear;
+    -o-transition: all 0.8s linear;
+    transition: all 0.8s linear;
+}
+
+.alertMsgDown {
+    /*width: 100%;*/
+    height: auto;
+    padding: 15px 15px;
+    border-width: 1px;
+}

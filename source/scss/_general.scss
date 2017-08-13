@@ -1,0 +1,109 @@
+//=============== VARIABLES =====================
+$body-background: #fff;
+$text_color1: #2ecc71;
+$text_color2: #737373;
+$menu_bkg: #44433e;
+$h1--fontSize: 26px;
+$h2--fontSize: 14px;
+$h3--fontSize: 11px;
+
+@mixin slideUp() {
+  max-height: 0;
+  overflow-y: hidden;
+  @include transitionAll(0.8s);
+}
+
+@mixin slidedown($max-height) {
+  max-height: $max-height;
+}
+
+@mixin transitionAll($time) {
+  -webkit-transition: all $time ease-in-out;
+  -moz-transition: all $time ease-in-out;
+  -o-transition: all $time ease-in-out;
+  transition: all $time ease-in-out;
+}
+
+@mixin overlayBkg(){
+  background-color: #2ecc71;
+  opacity: 0.83;
+  filter: alpha(opacity=83);
+}
+
+// ========== fonts ===========
+@font-face {
+  font-family: 'Berlin-Sans-FB';
+  src: url('./../../assets/fonts/Berlin-Sans-FB_6747.ttf') format('ttf');
+}
+
+@font-face {
+  font-family: 'Novecentosanswide-DemiBold';
+  src: url('./../../assets/fonts/Novecentosanswide-DemiBold-webfont.woff2') format('woff2'),
+  url('./../../assets/fonts/Novecentosanswide-DemiBold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+//=============== COMMON =====================
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 'Novecentosanswide-DemiBold', sans-serif;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  background-color: $body-background;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.green-text {
+  color: $text_color1;
+}
+
+.white-text {
+  color: white;
+}
+
+.black-text {
+  color: black
+}
+
+.block-std{
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
+}
+
+/// ==========
+.div1{
+  width: 100%;
+  justify-content: center;
+}
+
+
+.div2{
+  max-width: 1200px;
+}
+
+
+.flex3{
+  display:flex;
+}
+
+
+.item5, .item31{
+  display: flex;
+  width: 50%;
+  min-width: 200px; // после чего начинается wrap
+}

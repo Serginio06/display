@@ -41,7 +41,7 @@ module.exports = function (app, pool) {
             res.status (200).send ('{"status":1,"sessionUserName":"' + req.session.username + '","sessionId":"' + req.session.id + '"}');
         } else {
 
-            console.log('Check passworkHash and start new session');
+            // console.log('Check passworkHash and start new session');
 
             let query = passwordHandler.checkPassword (req.body.pass);
             let rows = [];
@@ -64,7 +64,7 @@ module.exports = function (app, pool) {
                     res.status (200).send ('{"status":0}');
                 }
 
-                console.log ('rows = ', rows);
+                // console.log ('rows = ', rows);
             });
 
         }

@@ -4,7 +4,7 @@
   "description": "lessons and project for nodejs",
   "main": "./app.js",
   "scripts": {
-    "start": "node app.js"
+    "starting": "node app.js"
   },
   "keywords": [
     "nodeJS"
@@ -13,12 +13,22 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.17.2",
+    "browser-sync": "^2.18.13",
     "cookie-parser": "^1.4.3",
     "ejs": "^2.5.7",
     "express": "^4.15.3",
     "express-mysql-session": "^1.2.1",
     "express-session": "^1.15.5",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-jshint": "^2.0.4",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.0",
+    "gulp-util": "^3.0.8",
+    "jshint": "2.x",
     "mysql": "^2.14.1",
+    "nodemon": "^1.11.0",
     "serve-index": "^1.9.0"
   }
 }

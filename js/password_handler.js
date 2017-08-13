@@ -1,5 +1,6 @@
 ﻿var crypto = require('crypto');
-var mysql = require('mysql'); 
+var mysql = require('mysql');
+const config = require ('./../config');
 
 module.exports = {
     // хэширование пароля
@@ -11,13 +12,14 @@ module.exports = {
     // проверка пароля 
     checkPassword: function (password) { 
 
-        var connection = mysql.createConnection({
-            host: 'localhost',
-            port: 3306,
-            user: 'root',
-            password: '123456',
-            database: 'newschema'
-        });
+        var connection = mysql.createConnection(config.db_params);
+        //     {
+        //     host: '35.187.178.187',
+        //     port: 3306,
+        //     user: 'root',
+        //     password: '123456',
+        //     database: 'display-db'
+        // });
 
         connection.connect(function (err) { if (err) console.log(err) });
 
