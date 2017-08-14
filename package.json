@@ -4,7 +4,7 @@
   "description": "lessons and project for nodejs",
   "main": "./app.js",
   "scripts": {
-    "starting": "node app.js"
+    "start": "node app.js"
   },
   "keywords": [
     "nodeJS"

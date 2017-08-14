@@ -3,9 +3,9 @@ $body-background: #fff;
 $text_color1: #2ecc71;
 $text_color2: #737373;
 $menu_bkg: #44433e;
-$h1--fontSize: 26px;
-$h2--fontSize: 14px;
-$h3--fontSize: 11px;
+$h1--fontSize: 2.6rem;
+$h2--fontSize: 1.4rem;
+$h3--fontSize: 1.1rem;
 
 @mixin slideUp() {
   max-height: 0;
@@ -52,6 +52,7 @@ $h3--fontSize: 11px;
   padding: 0;
   margin: 0;
   font-family: 'Novecentosanswide-DemiBold', sans-serif;
+  background-color: #fefefe;
 }
 
 html {
@@ -82,7 +83,18 @@ body {
   width: 100%;
   max-width: 1200px;
   display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+}
+
+.block__full-width{
+  width: 100%;
+  display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 /// ==========
