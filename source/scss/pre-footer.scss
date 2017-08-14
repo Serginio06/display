@@ -1,0 +1,98 @@
+.pre-footer {
+  height: 140px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pre-footer, .pre-footer__content-wrapper, .pre-footer-text, .pre-footer--btn-div, .pre-footer-div {
+  background-color: #322f2f;
+}
+
+.pre-footer__content-wrapper{
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+
+.pre-footer-div{
+  width: 50%;
+  min-width: 340px;
+  justify-content: flex-start;
+}
+
+.pre-footer-text{
+  font-size: 2.4rem;
+color: white;
+}
+
+.pre-footer--btn-div {
+  width: 50%;
+  min-width: 300px;
+  justify-content: flex-end;
+  display: flex;
+}
+
+.pre-footer-btn-div-wrapper{
+  width: 220px;
+  height: 40px;
+  background-color: $text_color1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pre-footer--btn-btn {
+  font-size: 1.4rem;
+  background-color: transparent;
+  color: white;
+  border: 0;
+  cursor: pointer;
+  text-decoration-line: none;
+  text-decoration-style: initial;
+  text-decoration-color: initial;
+  padding: 0;
+  margin: 0;
+
+}
+
+
+// ================= FOR MOBILE Screens ======================
+@media only screen and (max-width: 686px) {
+  .pre-footer {
+    height: auto;
+    padding: 40px;
+  }
+
+  .pre-footer__content-wrapper{
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .pre-footer-div {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    padding-bottom: 30px;
+  }
+
+  .pre-footer-text{
+    font-size:2.4rem ;
+    text-align: center;
+    min-width: 320px;
+    padding: 0 10px;
+  }
+
+  .pre-footer-btn-div-wrapper {
+    justify-content: center;
+  }
+
+  .pre-footer--btn-div {
+    width: 50%;
+    min-width: 300px;
+    justify-content: center;
+    display: flex;
+    //margin-bottom: 20px;
+  }
+}

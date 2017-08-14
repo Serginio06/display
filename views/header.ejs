@@ -1,20 +1,22 @@
+<script src="./views/header.js"></script>
 <div class="header block__full-width">
     <div class="header__logo-social block-std">
-        <div class="header__logo">
-
+        <div class="header__logo-wrapper">
+            <div class="header__logo"><a href="/"></a></div>
         </div>
+
         <div class="header__wrapper__social">
             <div class="header__social__tweeter"></div>
             <div class="header__social__facebook"></div>
-            <div class="header__social__facebook"></div>
-            <div class="header__social__facebook"></div>
-            <div class="header__social__facebook"></div>
-            <div class="header__social__facebook"></div>
+            <div class="header__social__rss"></div>
+            <div class="header__social__pinterest"></div>
+            <div class="header__social__googleplus"></div>
+            <div class="header__social__dribble"></div>
         </div>
     </div>
     <div class="header__navbar-separator block-std"></div>
     <div class="header__navbar block-std">
-        <ul class="header__navbar__li">
+        <ul class="header__navbar__li" id="header__navbar">
             <li class="header__navbar__li"><a href="/">home</a></li>
             <li class="header__navbar__li"><a href="/contact">contact</a></li>
         </ul>
@@ -23,11 +25,16 @@
         <div class="header__login__wrapper block-std">
             <h1 class="header__login-text uppercase white-text">check out our work</h1>
             <div class="header__login__block">
-                <input type="text" class="header__login__input-username">
-                <input type="text" class="header__login__input-pass">
-                <button class="header__login__btn uppercase green-text">Login in</button>
+                <div class="header__inputs-wrapper">
+                    <input type="text" class="header__login__input-username" placeholder="User name">
+                    <input type="text" class="header__login__input-pass" placeholder="Password">
+                </div>
+                <div class="header__btn-wrapper">
+                    <button class="header__login__btn uppercase green-text">Log in</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 

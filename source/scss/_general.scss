@@ -24,7 +24,7 @@ $h3--fontSize: 1.1rem;
   transition: all $time ease-in-out;
 }
 
-@mixin overlayBkg(){
+@mixin overlayBkg() {
   background-color: #2ecc71;
   opacity: 0.83;
   filter: alpha(opacity=83);
@@ -43,7 +43,6 @@ $h3--fontSize: 1.1rem;
   font-weight: normal;
   font-style: normal;
 }
-
 
 //=============== COMMON =====================
 
@@ -79,7 +78,19 @@ body {
   color: black
 }
 
-.block-std{
+h1 {
+  font-size: $h1--fontSize;
+}
+
+h2 {
+  font-size: $h2--fontSize;
+}
+
+h3 {
+  font-size: $h3--fontSize;
+}
+
+.block-std {
   width: 100%;
   max-width: 1200px;
   display: flex;
@@ -89,7 +100,7 @@ body {
   align-items: center;
 }
 
-.block__full-width{
+.block__full-width {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -98,24 +109,35 @@ body {
 }
 
 /// ==========
-.div1{
+.div1 {
   width: 100%;
   justify-content: center;
 }
 
-
-.div2{
+.div2 {
   max-width: 1200px;
 }
 
-
-.flex3{
-  display:flex;
+.flex3 {
+  display: flex;
 }
 
-
-.item5, .item31{
+.item5, .item31 {
   display: flex;
   width: 50%;
   min-width: 200px; // после чего начинается wrap
+}
+
+@media only screen and (max-width: 1220px) {
+  .block-std {
+    padding: 0 5%;
+  }
+
+  .header__navbar-separator{
+    margin: 0 5%;
+  }
+
+  h1{
+    font-size: 2.2rem;
+  }
 }
