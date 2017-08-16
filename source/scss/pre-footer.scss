@@ -24,7 +24,8 @@
 
 .pre-footer-text{
   font-size: 2.4rem;
-color: white;
+  color: white;
+  min-width: 320px;
 }
 
 .pre-footer--btn-div {
@@ -89,8 +90,8 @@ color: white;
   }
 
   .pre-footer--btn-div {
-    width: 50%;
-    min-width: 300px;
+    //width: 50%;
+    //min-width: 300px;
     justify-content: center;
     display: flex;
     //margin-bottom: 20px;

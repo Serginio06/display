@@ -2,6 +2,7 @@
 $body-background: #fff;
 $text_color1: #2ecc71;
 $text_color2: #737373;
+$text_color3: #a5a5a5;
 $menu_bkg: #44433e;
 $h1--fontSize: 2.6rem;
 $h2--fontSize: 1.4rem;
@@ -24,11 +25,42 @@ $h3--fontSize: 1.1rem;
   transition: all $time ease-in-out;
 }
 
+@mixin transitionOpacity($time) {
+  -webkit-transition: opacity $time ease-in-out;
+  -moz-transition: opacity $time ease-in-out;
+  -o-transition: opacity $time ease-in-out;
+  transition: opacity $time ease-in-out;
+}
+
+@mixin transitionHeight($time) {
+  -webkit-transition: height $time ease-in-out;
+  -moz-transition: height $time ease-in-out;
+  -o-transition: height $time ease-in-out;
+  transition: height $time ease-in-out;
+}
+
 @mixin overlayBkg() {
   background-color: #2ecc71;
   opacity: 0.83;
   filter: alpha(opacity=83);
 }
+//
+//@mixin placeholder($element, $color){
+//  $element::-webkit-input-placeholder { /* Chrome */
+//    color: $color;
+//  }
+//  $element:-ms-input-placeholder { /* IE 10+ */
+//    color: $color;
+//  }
+//  $element::-moz-placeholder { /* Firefox 19+ */
+//    color: $color;
+//    opacity: 1;
+//  }
+//  $element:-moz-placeholder { /* Firefox 4 - 18 */
+//    color: $color;
+//    opacity: 1;
+//  }
+//}
 
 // ========== fonts ===========
 @font-face {
@@ -108,6 +140,8 @@ h3 {
   align-items: center;
 }
 
+
+
 /// ==========
 .div1 {
   width: 100%;
@@ -139,5 +173,15 @@ h3 {
 
   h1{
     font-size: 2.2rem;
+  }
+
+}
+
+@media only screen and (max-width: 686px) {
+
+  .btn_mobile_view {
+    width: 100%!important;
+    max-width: 300px;
+    margin: 0 10px;
   }
 }

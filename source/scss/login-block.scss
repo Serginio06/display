@@ -1,0 +1,133 @@
+.header__login, .header__login__wrapper, .header__login__block, .header__inputs-wrapper, .header__btn-wrapper {
+  background-color: $text_color1;
+}
+
+.header__login {
+  height: 100px;
+}
+
+.header__login__wrapper{
+  justify-content: space-between;
+  align-content: stretch;
+  display: flex;
+  height: inherit;
+  flex-wrap: nowrap;
+}
+
+.header__login__block{
+  display: flex;
+  align-content: flex-end;
+  align-items: flex-end;
+  min-width: 325px;
+  margin-top: 20px;
+}
+
+.header__login-text{
+  background-color: $text_color1;
+  min-width: 310px;
+}
+
+
+.header__login__btn{
+  font-size: 1.5rem;
+  color: $text_color1;
+  background-color: white;
+  width: 85px;
+  height: 40px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Berlin-Sans-FB' sans-serif;
+  text-transform: uppercase;
+  font-weight: 100;
+}
+
+[class^="header__login__input"]{
+  width: 100px;
+  background-color: transparent;
+  border: none;
+  border-bottom:1px solid white;
+  margin-right: 20px;
+  color: white;
+  padding-left: 7px;
+  font-family: 'Berlin-Sans-FB';
+  font-size: 1.4rem;
+
+}
+
+
+//======== input placeholder properties ===========
+[class^="header__login__input"]::-webkit-input-placeholder { /* Chrome */
+  color: white;
+}
+[class^="header__login__input"]:-ms-input-placeholder { /* IE 10+ */
+  color: white;
+}
+[class^="header__login__input"]::-moz-placeholder { /* Firefox 19+ */
+  color: white;
+  opacity: 1;
+}
+[class^="header__login__input"]:-moz-placeholder { /* Firefox 4 - 18 */
+  color: white;
+  opacity: 1;
+}
+
+.header__inputs-wrapper{
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+// ================= FOR MOBILE Screens ======================
+@media only screen and (max-width: 686px) {
+  .header__login {
+    height: auto;
+  }
+
+  .header__login__wrapper {
+    justify-content: center;
+    flex-wrap: wrap;
+    //height: 180px;
+    padding: 0 10px;
+    margin: 40px 0;
+  }
+
+  [class^="header__login__input"] {
+    width: 100%;
+    font-size: 2rem;
+    margin: 10px 0;
+    padding: 0 10px;
+  }
+
+  .header__login-text{
+    padding-bottom:20px;
+    text-align: center;
+    font-size: 2.4rem;
+  }
+
+  .header__login__block{
+    flex-wrap: wrap;
+    min-width: 320px;
+    justify-content: center;
+    padding: inherit;
+  }
+
+  .header__inputs-wrapper{
+    width: 100%;
+    max-width: 400px;
+    padding: 0 10px;
+    //align-content: stretch;
+  }
+
+  .header__btn-wrapper{
+    align-items: center;
+    min-width: 320px;
+    justify-content: center;
+    display: flex;
+    margin-top: 20px;
+    padding: 0 10px;
+  }
+
+  //.header__login__btn{
+  //  width: 100%;
+  //}
+}

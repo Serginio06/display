@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./head.ejs') %>
+<title>Display</title>
+<body onload="onHeaderLoad()">
+<%- include('./header.ejs') %>
+
+<div class="contact block__full-width">
+    <div class="contact__title-wrapper block__full-width">
+        <div class="contact__title__text-wrapper block-std">
+            <h1 class="contact__title__text uppercase white-text">got a questions or inquiry?</h1>
+        </div>
+    </div>
+    <div class="contact__content block__full-width">
+        <div class="contact__content__map"></div>
+        <div class="contact__content__form">
+            <div class="contact__content__form-title uppercase">Conctact form</div>
+            <div class="contact__content__form-name">
+                <input type="text" class="contact__content__form__input-name" placeholder="Name">
+            </div>
+            <div class="contact__content__form-email">
+                <input type="text" class="contact__content__form__input-email" placeholder="Email Address">
+            </div>
+            <div class="contact__content__form-subject">
+                <input type="text" class="contact__content__form__input-subject" placeholder="Subject">
+            </div>
+            <div class="contact__content__form-msg">
+                <textarea type="text" class="contact__content__form__input-msg"></textarea>
+            </div>
+            <div class="contact__content__btn-wrapper">
+                <button class="contact__content__form__btn-submit uppercase white-text btn_mobile_view">send message</button>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<%- include('./footer.ejs') %>
+
+</body>
+</html>

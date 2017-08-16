@@ -1,0 +1,4 @@
+function click(type) {
+
+
+}
