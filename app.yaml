@@ -21,3 +21,16 @@ beta_settings:
   cloud_sql_instances: circular-source-174612:europe-west1:display-db
 # [END cloudsql_settings]
 # [END app_yaml]
+
+manual_scaling:
+  instances: 5
+vm: true
+service: SimpleExpressService
+health_check:
+  enable_health_check: False
+automatic_scaling:
+  min_num_instances: 1
+  max_num_instances: 4
+  cool_down_period_sec: 120
+  cpu_utilization:
+    target_utilization: 0.5
