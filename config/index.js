@@ -1,10 +1,11 @@
 module.exports = {
     db_params:{
-        host: '35.187.178.187',
-        port: '3306',
-        user: 'root',
-        password: '123456',
-        database: 'data'
+    host:'localhost',
+    port:'3306',
+    user:'root',
+    password:'123456',
+    database:'data',
+    socketPath:'/cloudsql/circular-source-174612:europe-west1:display-db'
     },
     port:process.env.port || 8081,
     google_oAuthClient:{
@@ -16,12 +17,20 @@ module.exports = {
 };
 
 
-// GCP db
-// host:'35.187.178.187',
+// GCP db local
+//     host:'35.187.178.187',
 //     port:'3306',
 //     user:'root',
 //     password:'123456',
 //     database:'data'
+
+// GCP db APP engine
+//     host:'localhost',
+//     port:'3306',
+//     user:'root',
+//     password:'123456',
+//     database:'data',
+//     socketPath:'/cloudsql/circular-source-174612:europe-west1:display-db'
 
 // local DB
 // host:'localhost',
