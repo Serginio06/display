@@ -10,6 +10,7 @@ env_variables:
   # e.g. my-awesome-project:us-central1:my-cloud-sql-instance
   INSTANCE_CONNECTION_NAME: circular-source-174612:europe-west1:display-db
   SQL_CLIENT: mysql
+  MYSQL_SOCKET_PATH: /cloudsql/circular-source-174612:europe-west1:display-db
 # [END env]
 
 # [START cloudsql_settings]
