@@ -22,8 +22,6 @@ beta_settings:
 # [END cloudsql_settings]
 # [END app_yaml]
 
-manual_scaling:
-  instances: 5
 vm: true
 health_check:
   enable_health_check: False
