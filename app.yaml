@@ -22,7 +22,6 @@ beta_settings:
 # [END cloudsql_settings]
 # [END app_yaml]
 
-vm: true
 health_check:
   enable_health_check: False
 automatic_scaling:
