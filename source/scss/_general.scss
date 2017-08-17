@@ -39,10 +39,24 @@ $h3--fontSize: 1.1rem;
   transition: height $time ease-in-out;
 }
 
+@mixin transitionWidth($time) {
+  -webkit-transition: width $time ease-in-out;
+  -moz-transition: width $time ease-in-out;
+  -o-transition: width $time ease-in-out;
+  transition: width $time ease-in-out;
+}
+
 @mixin overlayBkg() {
   background-color: #2ecc71;
   opacity: 0.83;
   filter: alpha(opacity=83);
+}
+
+@mixin bottomBorderRadius($radius){
+  -moz-border-radius-bottomleft: $radius;
+  -moz-border-radius-bottomright: $radius;
+  border-bottom-left-radius:$radius;
+  border-bottom-right-radius:$radius;
 }
 //
 //@mixin placeholder($element, $color){

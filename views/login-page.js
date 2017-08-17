@@ -1,5 +1,5 @@
 function signUp() {
-
+console.log('siging up');
     var loginElem = document.getElementById ('loginInput');
     var passElem = document.getElementById ('passInput');
     var alertMsgEl = document.getElementById ('alert-msg');

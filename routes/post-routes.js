@@ -1,5 +1,6 @@
 
 const passwordHandler = require ('./../js/password_handler');
+var emailHandler = require('./../js/email_handler');
 
 module.exports = function (app, pool) {
 
@@ -68,6 +69,17 @@ module.exports = function (app, pool) {
             });
 
         }
+    });
+
+    app.post('/send-email', function (req,res) {
+        
+        // console.log('Request to send email with body.msg: ', req.body.msg);
+
+        emailHandler.sendEmail(req.body, function (err, response) {
+            if ( err ) {res.status (500).send ('Email was not sent. Sorry, try again later');}
+        });
+
+        res.status (200).send ('Email was sent');
     })
 
 };

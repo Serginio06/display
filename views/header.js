@@ -1,11 +1,7 @@
 function onHeaderLoad() {
 
     var navBarEl = document.getElementById('header__navbar');
-    
-    console.log('navBarEl=', navBarEl);
     var firstChild = navBarEl;
-    console.log('navBarEl.childNodes[3]=', navBarEl.childNodes[3]);
-    console.log('navBarEl.childNodes=', navBarEl.childNodes);
 
     if ( window.location.pathname ===  '/') {
     // console.log('this is /');

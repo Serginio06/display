@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <style>
+        h4 {color:#2ecc71;}
+        p {color:#737373;}
+        table, th, td {
+            border: 1px solid black;
+            color: #737373;
+        }
+    </style>
+</head>
+<body>
+
+<h3>Dear Administrator</h3>
+<p>user <b><%= userName %></b> sent you a question</p>
+<br>
+<table>
+    <tr>
+        <td><b>User name:</b></td>
+        <td><%= userName %></td>
+    </tr>
+    <tr>
+        <td><b>Email:</b></td>
+        <td><%= userEmail %></td>
+    </tr>
+    <tr>
+        <td><b>Subject:</b></td>
+        <td><%= subject %></td>
+    </tr>
+    <tr>
+        <td><b>Message:</b></td>
+        <td><%= msg %></td>
+    </tr>
+</table>
+<br>
+<h4>Regards,</h4>
+<h4>Display team</h4>
+<img src="cid:logo.png"/>
+
+</body>
+</html>

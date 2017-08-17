@@ -16,20 +16,28 @@
         <div class="contact__content__form">
             <div class="contact__content__form-title uppercase">Conctact form</div>
             <div class="contact__content__form-name">
-                <input type="text" class="contact__content__form__input-name" placeholder="Name">
+                <input type="text" class="contact__content__form__input-name" id="contact__content__form__input-name" placeholder="Name" onblur="checkName(event)">
+                <div class="contact__err__name" id="contact__err__name">Only latin letters allow</div>
             </div>
             <div class="contact__content__form-email">
-                <input type="text" class="contact__content__form__input-email" placeholder="Email Address">
+                <input type="text" class="contact__content__form__input-email" id="contact__content__form__input-email" placeholder="Email Address"  onblur="checkEmail(event)">
+                <div class="contact__err__email" id="contact__err__email">Please enter valid email address</div>
             </div>
             <div class="contact__content__form-subject">
-                <input type="text" class="contact__content__form__input-subject" placeholder="Subject">
+                <input type="text" class="contact__content__form__input-subject" id="contact__content__form__input-subject" placeholder="Subject"  onblur="checkSubject(event)">
+                <div class="contact__err__subject" id="contact__err__subject">Only latin letters allow</div>
             </div>
             <div class="contact__content__form-msg">
-                <textarea type="text" class="contact__content__form__input-msg"></textarea>
+                <textarea type="text" class="contact__content__form__input-msg" id="contact__content__form__input-msg"  onblur="checkMsg(event)"></textarea>
+                <div class="contact__err__msg" id="contact__err__msg">Message should be more then 20 characters</div>
             </div>
             <div class="contact__content__btn-wrapper">
-                <button class="contact__content__form__btn-submit uppercase white-text btn_mobile_view">send message</button>
+                <button class="contact__content__form__btn-submit uppercase white-text btn_mobile_view" onclick="sendUserMessage()">send message</button>
+                <div class="contact__err__submit" id="contact__err__submit"></div>
             </div>
+            <!--<div class="contact__sent__err-wrapper">-->
+                <!--<div class="contact__err__submit" id="contact__err__submit"></div>-->
+            <!--</div>-->
         </div>
 
 

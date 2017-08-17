@@ -3,12 +3,11 @@ const app = express();
 const config = require ('./config');
 var bodyParser = require('body-parser');
 
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json());
 
-// require('./js/sessions-init')(app);
+require('./js/sessions-init')(app);
 
 app.use('/views', express.static(__dirname + '/views'));
 app.use('/assets', express.static(__dirname + '/assets'));
