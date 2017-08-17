@@ -1,6 +1,6 @@
 module.exports = {
     db_params: {
-        host: "127.0.0.1",
+        host: "35.187.178.187",
         port: '3306',
         user: 'root',
         password: '123456',
