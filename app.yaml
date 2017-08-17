@@ -25,7 +25,6 @@ beta_settings:
 manual_scaling:
   instances: 5
 vm: true
-service: SimpleExpressService
 health_check:
   enable_health_check: False
 automatic_scaling:
