@@ -32,18 +32,7 @@ module.exports = function (app, pool) {
 
     });
 
-    app.post ('/userLogOut', function (req, res) {
 
-        if (req.session.username) {
-            console.log ('Session was active for current user');
-            console.log ('req.session.username was = ', req.session.username);
-            req.session.username = '';
-            res.status (200).send ('{"status":1,"sessionUserName":"' + req.session.username + '","sessionId":"' + req.session.id + '"}');
-        } else {
-            console.log('user was not logged in');
-            res.status (200).send ('{"status":0,"sessionUserName":"' + req.session.username + '","sessionId":"' + req.session.id + '"}');
-        }
-    });
 
     app.post ('/userLogin', function (req, res) {
 
@@ -89,8 +78,6 @@ module.exports = function (app, pool) {
 
     app.post ('/send-email', function (req, res) {
 
-        // console.log('Request to send email with body.msg: ', req.body.msg);
-
         emailHandler.sendEmail (req.body, function (err, response) {
             if (err) {res.status (500).send ('Email was not sent. Sorry, try again later');}
         });
@@ -98,16 +85,25 @@ module.exports = function (app, pool) {
         res.status (200).send ('Email was sent');
     });
 
-    app.post ('/checkUsername', function (req, res) {
 
-        console.log('CHECK USER SESSION. req.session= ', req.session);
-        console.log ('req.session.username= ', req.session.username);
-        console.log ('req.session.id= ', req.session.id);
-        console.log ('req.session= ', req.session);
+    app.post ('/userLogOut', function (req, res) {
 
-        if (req.session.username) {
-            console.log ('Check result: Session is active for user ', req.session.username);
+        if (req.session.username  && req.session.username !== undefined) {
+            console.log (' userLogOut Session was active for user ', req.session.username);
             req.session.username = '';
+            res.status (200).send ('{"status":1,"sessionUserName":"' + req.session.username + '","sessionId":"' + req.session.id + '"}');
+        } else {
+            console.log('user was not logged in');
+            res.status (200).send ('{"status":0,"sessionUserName":"' + req.session.username + '","sessionId":"' + req.session.id + '"}');
+        }
+    });
+
+
+    app.post ('/checkUsername', function (req, res) {
+        console.log ('CHECK. req.session.username= ', req.session.username);
+        console.log ('CHECK. req.session.id= ', req.session.id);
+
+        if (req.session.username && req.session.username !== undefined) {
             res.status (200).send ('{"status":1,"sessionUserName":"' + req.session.username + '","sessionId":"' + req.session.id + '"}');
         } else {
             console.log('Check result: user was not logged in');
