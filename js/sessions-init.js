@@ -8,7 +8,8 @@ const config = require ('./../config');
 
 
 
-const mySessionStore = new mySQL(Object.assign(config.db_params,{checkExpiratinInterval: 30000},{expiration: 60000}));
+// const mySessionStore = new mySQL(Object.assign(config.db_params,{checkExpirationInterval: 900000},{expiration: 60000}));
+const mySessionStore = new mySQL(Object.assign(config.db_params,{checkExpirationInterval: 900000},{expiration: 600000}));
 
 
 //     {
@@ -22,6 +23,19 @@ const mySessionStore = new mySQL(Object.assign(config.db_params,{checkExpiratinI
 //     expiration: 60000 // 1 min
 // });
 
+//
+// module.exports = function (app) {
+//     app.use(session({
+//         secret:'mySecretKey12345',
+//         store:mySessionStore,
+//         saveUninitialized:false,
+//         resave:true,
+//         cookie: {
+//             expires: 604800000,
+//             httpOnly: false
+//         }
+//     }));
+// };
 
 module.exports = function (app) {
     app.use(session({

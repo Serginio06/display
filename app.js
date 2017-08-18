@@ -7,7 +7,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json());
 
-// require('./js/sessions-init')(app);
+require('./js/sessions-init')(app);
 
 app.use('/views', express.static(__dirname + '/views'));
 app.use('/assets', express.static(__dirname + '/assets'));
@@ -27,6 +27,6 @@ app.listen(config.port, function (err) {
     
     if ( err ) console.log('err on server start. Error: ', err.stack);
     
-    console.log('Server is running');
+    console.log('Server is running on port ', config.port);
 });
 

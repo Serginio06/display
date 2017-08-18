@@ -1,4 +1,4 @@
-.header__login, .header__login__wrapper, .header__login__block, .header__inputs-wrapper, .header__btn-wrapper {
+.header__login, .header__login__wrapper, .header__login__block, .header__inputs-wrapper, .header__btn-wrapper, .header__login__alertMsgUp, .header__login__alertMsgDown, .header__login__loged-div {
   background-color: $text_color1;
 }
 
@@ -6,7 +6,7 @@
   height: 100px;
 }
 
-.header__login__wrapper{
+.header__login__wrapper {
   justify-content: space-between;
   align-content: stretch;
   display: flex;
@@ -14,7 +14,7 @@
   flex-wrap: nowrap;
 }
 
-.header__login__block{
+.header__login__block {
   display: flex;
   align-content: flex-end;
   align-items: flex-end;
@@ -22,13 +22,12 @@
   margin-top: 20px;
 }
 
-.header__login-text{
+.header__login-text {
   background-color: $text_color1;
   min-width: 310px;
 }
 
-
-.header__login__btn{
+.header__login__btn {
   font-size: 1.5rem;
   color: $text_color1;
   background-color: white;
@@ -41,11 +40,11 @@
   font-weight: 100;
 }
 
-[class^="header__login__input"]{
+[class^="header__login__input"] {
   width: 100px;
   background-color: transparent;
   border: none;
-  border-bottom:1px solid white;
+  border-bottom: 1px solid white;
   margin-right: 20px;
   color: white;
   padding-left: 7px;
@@ -54,27 +53,81 @@
 
 }
 
-
 //======== input placeholder properties ===========
 [class^="header__login__input"]::-webkit-input-placeholder { /* Chrome */
   color: white;
 }
+
 [class^="header__login__input"]:-ms-input-placeholder { /* IE 10+ */
   color: white;
 }
+
 [class^="header__login__input"]::-moz-placeholder { /* Firefox 19+ */
   color: white;
   opacity: 1;
 }
+
 [class^="header__login__input"]:-moz-placeholder { /* Firefox 4 - 18 */
   color: white;
   opacity: 1;
 }
 
-.header__inputs-wrapper{
+.header__inputs-wrapper {
   display: flex;
   justify-content: flex-end;
   flex-wrap: wrap;
+}
+
+.header__login__alertmsg-wrapper {
+  background-color: transparent;
+}
+
+
+.header__login__loged-div {
+  color: white;
+  font-family: Berlin-Sans-FB;
+  font-size: 1.8rem;
+  padding: 15px;
+}
+
+// ========== alert login message =========
+
+#alert-msg{
+  color: #a94442;
+  background-color: #f2dede;
+}
+
+#info-msg{
+  color: #3c763d;
+  background-color: #dff0d8;
+}
+
+.header__login__alertMsgUp, .header__login__alertMsgDown {
+  width: 0;
+  overflow: hidden;
+  font-family: Berlin-Sans-FB;
+  font-size: 1.4rem;
+  border-radius: 4px;
+  padding-left: 0px;
+  padding-bottom: 0px;
+  height: 0;
+  overflow: hidden;
+  //padding: 0 15px;
+  border: 0;
+  -webkit-transition: height 0.8s linear;
+  -moz-transition: height 0.8s linear;
+  -o-transition: height 0.8s linear;
+  transition: height 0.8s linear;
+}
+
+
+.header__login__alertMsgDown {
+  width: 300px;
+  height: 20px;
+  //padding: 15px 15px;
+  border-width: 1px;
+  padding-left: 7px;
+  padding-bottom: 5px;
 }
 
 // ================= FOR MOBILE Screens ======================
@@ -98,27 +151,27 @@
     padding: 0 10px;
   }
 
-  .header__login-text{
-    padding-bottom:20px;
+  .header__login-text {
+    padding-bottom: 20px;
     text-align: center;
     font-size: 2.4rem;
   }
 
-  .header__login__block{
+  .header__login__block {
     flex-wrap: wrap;
     min-width: 320px;
     justify-content: center;
     padding: inherit;
   }
 
-  .header__inputs-wrapper{
+  .header__inputs-wrapper {
     width: 100%;
     max-width: 400px;
     padding: 0 10px;
     //align-content: stretch;
   }
 
-  .header__btn-wrapper{
+  .header__btn-wrapper {
     align-items: center;
     min-width: 320px;
     justify-content: center;

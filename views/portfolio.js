@@ -47,12 +47,15 @@ function showPrjDetails(e) {
             ) / 2
         ) - 50;
 
-    prjDetailsPopup.style.top = top +'px';
-    prjDetailsPopup.style.left = left +'px';
-    prjDetailsPopup.style.width = width +'px';
-    prjDetailsPopup.style.height = height +'px';
+    if ( prjDetailsPopup ) {
+        prjDetailsPopup.style.top = top +'px';
+        prjDetailsPopup.style.left = left +'px';
+        prjDetailsPopup.style.width = width +'px';
+        prjDetailsPopup.style.height = height +'px';
 
-    prjDetailsPopup.className = 'portfolio__images__float-block showUp';
+        prjDetailsPopup.className = 'portfolio__images__float-block showUp';
+    }
+
 }
 
 function hidePrjDetails(event) {

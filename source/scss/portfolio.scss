@@ -165,6 +165,8 @@
   .portfolio__navbar {
     justify-content: center;
     min-width: 300px;
+    display: flex;
+    flex-wrap: wrap;
   }
 
   [class^="portfolio__images__item-"]{

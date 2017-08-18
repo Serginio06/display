@@ -22,11 +22,9 @@ beta_settings:
 # [END cloudsql_settings]
 # [END app_yaml]
 
+manual_scaling:
+  instances: 1
 health_check:
   enable_health_check: False
-automatic_scaling:
-  min_num_instances: 1
-  max_num_instances: 4
-  cool_down_period_sec: 120
-  cpu_utilization:
-    target_utilization: 0.5
+
+  // start with gcloud app deploy --no-promote

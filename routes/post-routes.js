@@ -1,6 +1,5 @@
-
 const passwordHandler = require ('./../js/password_handler');
-var emailHandler = require('./../js/email_handler');
+var emailHandler = require ('./../js/email_handler');
 
 module.exports = function (app, pool) {
 
@@ -33,11 +32,27 @@ module.exports = function (app, pool) {
 
     });
 
+    app.post ('/userLogOut', function (req, res) {
+
+        if (req.session.username) {
+            console.log ('Session was active for current user');
+            console.log ('req.session.username was = ', req.session.username);
+            req.session.username = '';
+            res.status (200).send ('{"status":1,"sessionUserName":"' + req.session.username + '","sessionId":"' + req.session.id + '"}');
+        } else {
+            console.log('user was not logged in');
+            res.status (200).send ('{"status":0,"sessionUserName":"' + req.session.username + '","sessionId":"' + req.session.id + '"}');
+        }
+    });
+
     app.post ('/userLogin', function (req, res) {
 
 
         if (req.session.username) {
-            console.log('Session is active for current user');
+            console.log ('Session is active for current user');
+            console.log ('req.session.username= ', req.session.username);
+            console.log ('req.session.id= ', req.session.id);
+            console.log ('req.session= ', req.session);
 
             res.status (200).send ('{"status":1,"sessionUserName":"' + req.session.username + '","sessionId":"' + req.session.id + '"}');
         } else {
@@ -59,27 +74,45 @@ module.exports = function (app, pool) {
             query.on ('end', function () {
 
                 if (rows.length > 0 && rows[0].username === req.body.userName) {
-                        req.session.username = rows[0].username;
-                        res.status (200).send ('{"status":1,"sessionUserName":"' + req.session.username + '","sessionId":"' + req.session.id + '"}');
+                    req.session.username = rows[0].username;
+                    console.log ('req.session during post:login= ', req.session);
+                    res.status (200).send ('{"status":1,"sessionUserName":"' + req.session.username + '","sessionId":"' + req.session.id + '"}');
                 } else {
                     res.status (200).send ('{"status":0}');
                 }
 
-                // console.log ('rows = ', rows);
+                console.log ('rows = ', rows);
             });
 
         }
     });
 
-    app.post('/send-email', function (req,res) {
-        
+    app.post ('/send-email', function (req, res) {
+
         // console.log('Request to send email with body.msg: ', req.body.msg);
 
-        emailHandler.sendEmail(req.body, function (err, response) {
-            if ( err ) {res.status (500).send ('Email was not sent. Sorry, try again later');}
+        emailHandler.sendEmail (req.body, function (err, response) {
+            if (err) {res.status (500).send ('Email was not sent. Sorry, try again later');}
         });
 
         res.status (200).send ('Email was sent');
+    });
+
+    app.post ('/checkUsername', function (req, res) {
+
+        console.log('CHECK USER SESSION. req.session= ', req.session);
+        console.log ('req.session.username= ', req.session.username);
+        console.log ('req.session.id= ', req.session.id);
+        console.log ('req.session= ', req.session);
+
+        if (req.session.username) {
+            console.log ('Check result: Session is active for user ', req.session.username);
+            req.session.username = '';
+            res.status (200).send ('{"status":1,"sessionUserName":"' + req.session.username + '","sessionId":"' + req.session.id + '"}');
+        } else {
+            console.log('Check result: user was not logged in');
+            res.status (200).send ('{"status":0,"sessionUserName":"' + req.session.username + '","sessionId":"' + req.session.id + '"}');
+        }
     })
 
 };

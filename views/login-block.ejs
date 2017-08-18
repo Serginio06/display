@@ -1,14 +1,25 @@
 <div class="header__login block__full-width">
     <div class="header__login__wrapper block-std">
         <h1 class="header__login-text uppercase white-text">check out our work</h1>
+
         <div class="header__login__block">
+            <div class="header__login__alertmsg-wrapper">
+                <div class="alert alert-danger header__login__alertMsgUp" role="alert" id="alert-msg"> som skdjf laskdjf lasdkjflksfj </div>
+                <div class="alert alert-info header__login__alertMsgUp" role="alert" id="info-msg"></div>
+            </div>
             <div class="header__inputs-wrapper">
-                <input type="text" class="header__login__input-username" placeholder="User name">
-                <input type="text" class="header__login__input-pass" placeholder="Password">
+                <div class="header__login__loged-div" id="header__login__loged-div"></div>
+                <input type="text" class="header__login__input-username" placeholder="User name" id="loginInput">
+                <input type="text" class="header__login__input-pass" placeholder="Password" id="passInput">
             </div>
             <div class="header__btn-wrapper">
-                <button class="header__login__btn uppercase green-text btn_mobile_view">Log in</button>
+                <button class="header__login__btn uppercase green-text btn_mobile_view" id="header__login__btn" onclick="login()">Log in
+                </button>
+                <button onclick="isUserLogin()">check user login</button>
+
             </div>
+
         </div>
+
     </div>
 </div>
