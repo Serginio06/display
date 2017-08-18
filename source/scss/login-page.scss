@@ -1,18 +1,72 @@
-.alertMsgUp, .alertMsgDown {
-    /*width: 0;*/
+//.alertMsgUp, .alertMsgDown {
+//    width: 100%;
+//    height: 40px;
+//    overflow: hidden;
+//    padding: 0 15px;
+//    border: 0;
+//    border-radius: 4px;
+//    -webkit-transition: all 0.8s linear;
+//    -moz-transition: all 0.8s linear;
+//    -o-transition: all 0.8s linear;
+//    transition: all 0.8s linear;
+//}
+//
+//.alertMsgDown {
+//    /*width: 100%;*/
+//    height: 40px;
+//    padding: 15px 15px;
+//    border-width: 1px;
+//}
+
+.contact__err__password-showup{
+    height: 18px;
+    @include transitionHeight(0.6s);
+}
+
+.signup__err__submit, .signup__err__submit-showup{
     height: 0;
+    width: 100%;
+    margin-left: 20px;
+    margin-top: 18px;
+    padding: 0;
+    border-width: 0;
+    border-style: solid;
+    border-color: transparent;
+    border-image: initial;
+    border-radius: 4px;
+    color: #3c763d;
+    background-color: #dff0d8;
+    white-space: nowrap;
     overflow: hidden;
-    padding: 0 15px;
-    border: 0;
+    max-width: 300px;
+    padding-left: 10px;
     -webkit-transition: all 0.8s linear;
     -moz-transition: all 0.8s linear;
     -o-transition: all 0.8s linear;
     transition: all 0.8s linear;
 }
 
-.alertMsgDown {
-    /*width: 100%;*/
-    height: auto;
-    padding: 15px 15px;
+.signup__err__submit-showup{
+    //height: 18px;
+    //width:300px;
+    height: 40px;
     border-width: 1px;
+    padding: 10px 10px;
+    //@include transitionHeight(0.6s);
+    -webkit-transition: all 0.8s linear;
+    -moz-transition: all 0.8s linear;
+    -o-transition: all 0.8s linear;
+    transition: all 0.8s linear;
+}
+
+// ================= FOR MOBILE Screens ======================
+@media only screen and (max-width: 686px) {
+
+
+    .signup__err__submit{
+        //width: 100%;
+        margin-left: 0;
+        width: 300px;
+        min-width: 300px;
+    }
 }

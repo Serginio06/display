@@ -31,7 +31,8 @@
 .portfolio__images-wrapper{
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  //justify-content: space-between;
+  justify-content: flex-start;
   margin-right: -20px;
 }
 
@@ -46,6 +47,7 @@
   //background-size: contain;
   background-size: cover;
   background-position: center;
+  max-width: 385px;
 }
 
 .portfolio__images__item-001{
@@ -92,7 +94,7 @@
 }
 
 .portfolio__images__item-012{
-  background-image: url('/views/uploads/012.jpg');
+  background-image: url('/assets/images/new-project.png');
 }
 
 
@@ -167,6 +169,7 @@
     min-width: 300px;
     display: flex;
     flex-wrap: wrap;
+    padding: 0 15px;
   }
 
   [class^="portfolio__images__item-"]{
@@ -175,5 +178,9 @@
 
   .block-std{
     padding: 0;
+  }
+
+  .portfolio__images-wrapper{
+    justify-content: center;
   }
 }

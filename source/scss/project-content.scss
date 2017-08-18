@@ -30,7 +30,11 @@
   justify-content: center;
   align-items: center;
   img{
+    background-image: url("/assets/images/new-project.png");
     background-color: transparent;
+    position: relative;
+    width: 100%;
+    height: 100%;
   }
 }
 
@@ -97,6 +101,124 @@
   border: 0;
 }
 
+
+// ====== File input ===========
+
+
+
+
+//#uploade-file{
+//  //display: none;/* скрываем input file */
+//}
+//
+//.prj__file-name{
+//  position: relative;
+//  top: -124px;
+//  left: -150px;
+//  color: #a94442;
+//  /* height: 20px; */
+//  padding: 5px;
+//  overflow: hidden;
+//  font-family: Berlin-Sans-FB;
+//  font-size: 1.4rem;
+//  background-color: #f2dede;
+//  padding-left: 7px;
+//  -moz-border-radius-bottomleft: 6px;
+//  -moz-border-radius-bottomright: 6px;
+//  border-top-left-radius: 6px;
+//  border-top-right-radius: 6px;
+//}
+
+
+
+.file-upload input[type="file"]{
+
+  display: none;/* скрываем input file */
+
+}
+
+/* задаем стили кнопки выбора файла*/
+
+.file-upload {
+
+  //position: relative;
+  //overflow: hidden;
+  //width: 250px;
+  //height: 40px;
+
+  //background: #4169E1;
+  //background-color: #4169E1;
+  //background-image: url("/assets/images/new-project.png");
+  //border-radius: 10px;
+  //color: #a94442;
+  //text-align: center;
+
+}
+
+//.file-upload:hover {
+//
+//  //background: #1E90FF;
+//
+//}
+
+/* Растягиваем label на всю область блока .file-upload */
+
+.prj__content__img label {
+  //background-image: url("/assets/images/new-project.png");
+  display: block;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+
+
+.prj__content__err__submit, .prj__content__err__submit-showup{
+  height: 0;
+  width: 100%;
+  margin-left: 20px;
+  margin-top: 18px;
+  padding: 0;
+  border-width: 0;
+  border-style: solid;
+  border-color: transparent;
+  border-image: initial;
+  border-radius: 4px;
+  color: #3c763d;
+  background-color: #dff0d8;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 300px;
+  padding-left: 10px;
+  -webkit-transition: all 0.8s linear;
+  -moz-transition: all 0.8s linear;
+  -o-transition: all 0.8s linear;
+  transition: all 0.8s linear;
+}
+
+.prj__content__err__submit-showup{
+  //height: 18px;
+  //width:300px;
+  height: 40px;
+  border-width: 1px;
+  padding: 10px 10px;
+  //@include transitionHeight(0.6s);
+  -webkit-transition: all 0.8s linear;
+  -moz-transition: all 0.8s linear;
+  -o-transition: all 0.8s linear;
+  transition: all 0.8s linear;
+}
+
+
+
 // ================= FOR MOBILE Screens ======================
 @media only screen and (max-width: 686px) {
   .prj-content{
@@ -144,10 +266,11 @@
     justify-content: center;
   }
 
-  //.prj__content__btn{
-  //  width: 100%;
-  //  max-width: 300px;
-  //  margin: 0 10px;
-  //}
+  .prj__content__err__submit{
+    //width: 100%;
+    margin-left: 0;
+    width: 300px;
+    min-width: 300px;
+  }
 
 }

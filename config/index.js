@@ -17,14 +17,14 @@ module.exports = {
 };
 
 
-// GCP db local
+// local test db on cloud
 //     host:'35.187.178.187',
 //     port:'3306',
 //     user:'root',
 //     password:'123456',
 //     database:'data'
 
-// GCP db APP engine
+// GCP deployemnt: db Cloud
 //     host:'localhost',
 //     port:'3306',
 //     user:'root',
@@ -32,9 +32,9 @@ module.exports = {
 //     database:'data',
 //     socketPath:'/cloudsql/circular-source-174612:europe-west1:display-db'
 
-// local DB
-// host:'localhost',
+// local test and local db
+//     host:'localhost',
 //     port:'3306',
 //     user:'root',
 //     password:'123456',
-//     database:'newschema'
+//     database:'data'

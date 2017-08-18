@@ -168,7 +168,7 @@
     width: 100%;
     max-width: 400px;
     padding: 0 10px;
-    //align-content: stretch;
+    justify-content: center;
   }
 
   .header__btn-wrapper {
@@ -180,7 +180,5 @@
     padding: 0 10px;
   }
 
-  //.header__login__btn{
-  //  width: 100%;
-  //}
+
 }

@@ -2,9 +2,9 @@
 <html lang="en">
 <%- include('./head.ejs') %>
 <title>Display</title>
-<body onload="onHeaderLoad()">
+<body onload="onHeaderLoad()" onscroll="hidePrjDetails(event)">
 <%- include('./header.ejs') %>
-<%- include('./login-block.ejs') %>
+<%- include('./login-block.ejs',{title:'check out our work'}) %>
 
 <%- include('./portfolio.ejs') %>
 <%- include('./pre-footer.ejs') %>

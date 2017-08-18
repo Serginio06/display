@@ -1,4 +1,4 @@
-var isNameValid, isEmailValid, isSubjectValid, isMsgValid=false;
+var isNameValid, isEmailValid, isSubjectValid, isMsgValid, isPasswordValid =false;
 
 
 function checkName(e) {
@@ -59,7 +59,7 @@ function checkMsg(e) {
     }
 }
 
-function checkSubmitResult(type, msg) {
+function checkContactSubmitResult(type, msg) {
     var errEl = document.getElementById('contact__err__submit');
 
     if ( type === 'err') {
@@ -86,6 +86,9 @@ console.log('error during sending');
         },3000);
         cleanInputs();
     }
+
+
+
 }
 
 
@@ -110,17 +113,18 @@ function sendUserMessage() {
         xhr.onload = function () {
 
             if (xhr.status === 200) {
-                checkSubmitResult('success','Thank you for your message');
+                checkContactSubmitResult('success','Thank you for your message');
                 // return cb ('', JSON.parse (xhr.responseText));
             } else {
-                checkSubmitResult('err','Sorry, your message has not been sent. Please try later');
+                checkContactSubmitResult('err','Sorry, your message has not been sent. Please try later');
                 // return cb ('Error on during message sending', '');
             }
 
         };
 
     } else {
-        console.log('Not all fields are valide');
+        checkContactSubmitResult('err','Not all fields are valide of filled in');
+        // console.log('Not all fields are valide of filled in');
     }
 
 }
@@ -132,8 +136,10 @@ function cleanInputs(){
     var subjectInputEl = document.getElementById('contact__content__form__input-subject');
     var msgInputEl = document.getElementById('contact__content__form__input-msg');
 
+
     nameInputEl.value = '';
     emailInputEl.value = '';
     subjectInputEl.value = '';
     msgInputEl.value = '';
+
 }
