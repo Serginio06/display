@@ -25,21 +25,21 @@ module.exports = function (app, pool) {
     });
 
     app.get ('/new-project', function (req, res) {
-        if ( req.session.username ) {
-            res.render ('new_project',{type:'new',id:'',prjTitle:'add new project'});
+        if (req.session.username) {
+            res.render ('new_project', {type: 'new', id: '', prjTitle: 'add new project'});
         } else {
-            res.redirect('/login');
+            res.redirect ('/login');
         }
 
     });
 
     app.get ('/edit-project/:id', function (req, res) {
-        console.log('project edit, id=',req.params.id);
-        
-        if ( req.session.username ) {
-            res.render ('new_project',{type:'edit',id:req.params.id, prjTitle:'edit project'});
+        console.log ('project edit, id=', req.params.id);
+
+        if (req.session.username) {
+            res.render ('new_project', {type: 'edit', id: req.params.id, prjTitle: 'edit project'});
         } else {
-            res.redirect('/login');
+            res.redirect ('/login');
         }
 
     });
@@ -51,6 +51,18 @@ module.exports = function (app, pool) {
     app.get ('/login', function (req, res) {
         res.render ('login-page');
     });
+
+    // app.get ('/project-info/:id/:categoryIndex/:categoryName', function (req, res) {
+    app.get ('/project-info/:id', function (req, res) {
+        // console.log ('on project-info we received id= %s, catIndex=%s, catname=%s ', req.params.id, req.params.categoryIndex, req.params.categoryName);
+        // res.render('info_project');
+        res.render ('inf_project', {
+            id: req.params.id,
+            // categoryIndex: req.params.categoryIndex,
+            // categoryName: req.params.categoryName
+        });
+    });
+
 
     app.get ('/getProjectData/:id', function (req, res) {
 
@@ -73,14 +85,14 @@ module.exports = function (app, pool) {
         // console.log ('req.params.category= ', req.params.category);
         // console.log ('req.session.username= ', req.session.username);
 
-        let sql='';
+        let sql = '';
         let values = [];
-        if ( req.params.category == 'all') {
-             sql = 'SELECT * FROM projects';
-             values = [];
+        if (req.params.category == 'all') {
+            sql = 'SELECT * FROM projects';
+            values = [];
         } else {
-             sql = 'SELECT * FROM projects WHERE category=?';
-             values = [req.params.category];
+            sql = 'SELECT * FROM projects WHERE category=?';
+            values = [req.params.category];
         }
 
         pool.query (sql, values, function (err, result) {

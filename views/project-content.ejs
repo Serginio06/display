@@ -4,6 +4,7 @@
             <h1 class="prj__title__text-wrapper uppercase white-text"><%= prjTitle %></h1>
         </div>
     </div>
+    <%- include('./categories-block.ejs') %>
     <div class="prj__content block__full-width">
         <form onload="cleanUpPrjInputs ();" onsubmit="onNewPrjSubmit(event)" action="/upload" method="POST" enctype="multipart/form-data" >
             <div class="block-std">

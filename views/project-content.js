@@ -3,26 +3,24 @@ var prjId=0;
 
 
 function onProjectContentLoad(type,id) {
-    
-    // console.log('on new project load. type= %s and id= %s', type,id);
+
     prjType = type;
     prjId = id;
-
-
     if ( type === 'edit' && id ) {
+        // show category block
+        var categoryBlkEl = document.getElementById('categories-block');
+        categoryBlkEl.style.display = 'flex';
+
         xhrGetProjectFields(id, function (err, project) {
-
             if (err) {console.log('Error during get project field for edit: ', err);}
-
-            // console.log('Result of project= ', project[0]);
             setPrjInputs(project[0]);
-
         })
-
+    } else if ( type === 'new') {
+      // hide category block
+        var categoryBlkEl = document.getElementById('categories-block');
+        categoryBlkEl.style.display = 'none';
 
     }
-
-    
 }
 
 
@@ -54,6 +52,8 @@ function xhrGetProjectFields(id, cb) {
 
 
 function setPrjInputs(prjData) {
+
+    onCategoryBlockLoad(prjData.category);
 
     // var file = document.getElementById ('uploade-file');
     var descriptionEl = document.getElementById ('prj__content__body-Description');
