@@ -121,81 +121,79 @@ module.exports = function (app, pool) {
 
             console.log ('req.file=', req.file);
             console.log ('req.body=', req.body);
-            var fileName = Date.now ().toString ().slice (-5) + '.' + req.file.originalname.slice (-3);
 
-            var destPath = path.join (req.file.destination, fileName);
+            if (req.body.posttype === 'new' || (
+                    req.body.posttype === 'edit' && req.file
+                )) {
 
-            var src = fs.createReadStream (req.file.path);
-            var dest = fs.createWriteStream (destPath);
+                var fileName = Date.now ().toString ().slice (-5) + '.' + req.file.originalname.slice (-3);
+                var destPath = path.join (req.file.destination, fileName);
+                var src = fs.createReadStream (req.file.path);
+                var dest = fs.createWriteStream (destPath);
 
-            src.pipe (dest);
+                src.pipe (dest);
 
-            src.on ('end', function () {
-                fs.unlink (req.file.path);
+                src.on ('end', function () {
+                    fs.unlink (req.file.path);
 
-                addProjectToDB(req.body,fileName, function (err, result) {
+                    addProjectToDB (req.body, fileName, function (err, result) {
 
-                    if ( err ) {
-                        console.log("Error during insering in db: ", err);
-                        res.redirect ('/new-project');
-                    }
-
-                    res.redirect ('/');
+                        if (err) {
+                            console.log ("Error during insering in db: ", err);
+                            res.redirect ('/new-project');
+                        }
+                        res.redirect ('/');
+                    });
                 });
 
-            });
-
-            src.on ('error', function (error) {
-                fs.unlink (req.file.path);
-                console.log ('Error during file upload', error);
-                res.redirect ('/new-project');
-                // res.status (500).send ('Error during file upload', error)
-            });
-
+                src.on ('error', function (error) {
+                    fs.unlink (req.file.path);
+                    console.log ('Error during file upload', error);
+                    res.redirect ('/new-project');
+                });
+            } else {
+                addProjectToDB (req.body, '', function (err, result) {
+                    // console.log('update project without file');
+                    if (err) {
+                        console.log ("Error during insering in db: ", err);
+                        res.redirect ('/new-project');
+                    }
+                    res.redirect ('/');
+                });
+            }
         });
-
     });
 
     function addProjectToDB(formPrjInputsData, fileServerName, cb) {
 
-        let dataObj = Object.assign(formPrjInputsData, {src:"uploads/"+fileServerName},{date:new Date().toJSON().slice(0,10)});
-        console.log('dataObj=', dataObj);
+        let sql='';
+        let values ='';
+        let dataObj = Object.assign (formPrjInputsData, {src: "uploads/" + fileServerName}, {date: new Date ().toJSON ().slice (0, 10)});
+        console.log ('dataObj=', dataObj);
+        let description = dataObj.description.join('');
 
-        let sql = 'INSERT INTO projects ( title, author, description, category, src, date) VALUES ( ?, ?, ?, ?, ?, ?);';
-        let values = [ dataObj.title, dataObj.author, dataObj.description, dataObj.category, dataObj.src, dataObj.date];
-
-        // INSERT INTO `data`.`projects` (`id`, `title`, `author`, `description`, `category`, `src`, `date`) VALUES ('19', 'project 19', 'someAuthor', 'description', 'web', 'src here', '2017-11-05');
-
+        if (formPrjInputsData.posttype === 'new' ) {
+             sql = 'INSERT INTO projects ( title, author, description, category, src, date) VALUES ( ?, ?, ?, ?, ?, ?);';
+             values = [dataObj.title, dataObj.author, description, dataObj.category, dataObj.src, dataObj.date];
+        } else if (formPrjInputsData.posttype === 'edit') {
+            if ( fileServerName) {
+                // console.log('create sql with filename for update= ', fileServerName);
+                 sql = 'UPDATE projects SET title=?, author=?, description=?, category=?, src=?, date=? WHERE id=?;';
+                 values = [dataObj.title, dataObj.author, description, dataObj.category, dataObj.src, dataObj.date, formPrjInputsData.editid];
+            } else {
+                // console.log('create sql without filename for update= ', fileServerName);
+                 sql = 'UPDATE projects SET title=?, author=?, description=?, category=?,  date=? WHERE id=?;';
+                 values = [dataObj.title, dataObj.author, description, dataObj.category,  dataObj.date, formPrjInputsData.editid];
+            }
+        }
         pool.query (sql, values, function (err, result) {
 
-            if ( err ) {cb ('Error on insert project data to db: '+ err, '')}
+            if (err) {cb ('Error on insert project data to db: ' + err, '')}
             if (result && result.affectedRows > 0) {
-                        // res.setHeader ('Content-type', 'application/json');
-                        // let obj = '{"status":1}';
-                        // res.status (200).send (obj);
-                        cb('',result)
-                    } else {
+                cb ('', result)
+            } else {
                 cb ('Result of insert success but not one row was inserted ', '')
             }
-
-
-            // if (err) {
-            //     if (err.code === "ER_DUP_ENTRY") {
-            //         // console.log ('Duplicate entry ');
-            //         let obj = '{"status":2}';
-            //         res.status (200).send (obj);
-            //     } else {
-            //         console.log ('err on post /registerUser= ', err);
-            //     }
-            // } else {
-            //     if (result && result.affectedRows > 0) {
-            //         res.setHeader ('Content-type', 'application/json');
-            //         let obj = '{"status":1}';
-            //         res.status (200).send (obj);
-            //     }
-            // }
         });
-
     }
-
 };

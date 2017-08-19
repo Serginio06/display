@@ -1,20 +1,13 @@
-var prjType='';
-var prjId=0;
-
-
 function onProjectContentLoad(type,id) {
     
-    // console.log('on new project load. type= %s and id= %s', type,id);
-    prjType = type;
-    prjId = id;
-
+    console.log('on new project load. type= %s and id= %s', type,id);
 
     if ( type === 'edit' && id ) {
         xhrGetProjectFields(id, function (err, project) {
 
             if (err) {console.log('Error during get project field for edit: ', err);}
 
-            // console.log('Result of project= ', project[0]);
+            console.log('Result of project= ', project[0]);
             setPrjInputs(project[0]);
 
         })
@@ -80,7 +73,7 @@ function getFileName(event) {
     var file = event.target.files[0];
 
 
-    // console.log('file= ', file.type);
+    console.log('file= ', file.type);
     // var regEx = /([a-z\-_0-9\/\:\.]*\.(jpg|jpeg|png|gif))/i;
 
     if ( file.type === "image/jpeg" ) {
@@ -103,7 +96,7 @@ function getFileName(event) {
 function onNewPrjSubmit(event) {
 
     // event.preventDefault ();
-    // console.log ('we ar on submit');
+    console.log ('we ar on submit');
     // alert ('wer are submitting= ', descriptionEl.value);
     var file = document.getElementById ('uploade-file');
     var descriptionEl = document.getElementById ('prj__content__body-Description');
@@ -112,18 +105,13 @@ function onNewPrjSubmit(event) {
     var titleEl = document.getElementById ('prj__content__body-title');
 // console.log('file.value=', file.value);
 
-    if ( descriptionEl.value && categoryEl.value && authorEl.value && titleEl.value) {
+    if (file.value && descriptionEl.value && categoryEl.value && authorEl.value && titleEl.value) {
+        // cleanUpPrjInputs ();
+        setTimeout(function () {
 
-        if ( prjType === 'new' && file.value ) {
-            return true;
-        } else if( prjType === 'edit'){
-            return true;
-        } else {
-            checkPrjSubmitResult ('err', "Please choose project image before submit");
-            event.preventDefault ();
-            return false;
-        }
-
+        })
+        // submitNewPrj ();
+        return true;
     } else {
         checkPrjSubmitResult ('err', "Please enter all fields before submit");
         event.preventDefault ();

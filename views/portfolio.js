@@ -1,11 +1,13 @@
 var activeCategoryIndex = 2;
+var activeCategoryName = 'all';
 var prjDetailsPopup = '';
+var overProjectId = '';
 
 
 function onloadPortfolio() {
 
     if (window.location.pathname === '/') {
-        getCategoryProjects (1, 'all');
+        getCategoryProjects (1, activeCategoryName);
         prjDetailsPopup = document.getElementById ('portfolio__images__float-block');
     }
 }
@@ -23,7 +25,7 @@ function getCategoryProjects(categoryIndex, categoryName) {
         xhtpGetCategoryItems (categoryName, function (err, items) {
             if (err) {console.log ('Errof on getCategoryProjects ', err);}
             createPortfolioItems(items);
-            switchActiveCategory (categoryIndex);
+            switchActiveCategory (categoryIndex, categoryName);
         });
     }
 }
@@ -32,13 +34,14 @@ function createPortfolioItems(items) {
     clearPortfolioItems();
     var imgWrapperEl = document.getElementById ('portfolio__images-wrapper');
     var imageEl = [];
-    console.log ('getCategoryProjects returned ', items);
+    // console.log ('getCategoryProjects returned ', items);
 
     items.map (function (item, index) {
 
         // if ( index < 11 ) {
             imageEl[index] = document.createElement ('div');
             imageEl[index].setAttribute('class','portfolio__images__item-'+index);
+            imageEl[index].setAttribute('prjId',item.id);
             imageEl[index].onmouseover = showPrjDetails.bind(event);
 
             imageEl[index].style.backgroundImage = "url('/views/"+ item.src +"')" ;
@@ -74,8 +77,9 @@ function clearPortfolioItems() {
 }
 
 
-function switchActiveCategory(itemIndex) {
+function switchActiveCategory(itemIndex, catName) {
 
+    activeCategoryName = catName;
     var previouseActiveCategoryEl = document.getElementsByClassName ('portfolio__navbar__item-' + activeCategoryIndex.toString ())[0];
     previouseActiveCategoryEl.style.color = '#8a8888';
 
@@ -89,6 +93,8 @@ function switchActiveCategory(itemIndex) {
 function showPrjDetails(e) {
 
     let target = e.target;
+    overProjectId = target.getAttribute('prjId');
+    // console.log('overProjectId=', overProjectId);
     let top = target.getBoundingClientRect ().top;
     let left = target.getBoundingClientRect ().left;
     let right = target.getBoundingClientRect ().right;
@@ -133,7 +139,6 @@ function xhtpGetCategoryItems(activeCategoryName, cb) {
 
     xhtr.open ('GET', '/getCategoryItems/' + activeCategoryName, true);
     xhtr.setRequestHeader ('Content-type', 'application/json');
-
     xhtr.send ();
 
     xhtr.onload = function () {
@@ -148,3 +153,103 @@ function xhtpGetCategoryItems(activeCategoryName, cb) {
     }
 }
 
+function editProject() {
+    console.log('overProjectId=', overProjectId);
+
+
+
+    if ( overProjectId ) {
+
+        window.location.href = '/edit-project/' + overProjectId;
+
+
+        // xhtpEditProjectItem (overProjectId, function (err, result) {
+        //
+        //     if (err) {console.log ('Error on xhtpEditProjectItem ', err);}
+        //
+        //     if (result.status === 1) {
+        //         console.log('resutl of edit 1');
+        //     } else if ( result.status === 0 ){
+        //         console.log('project not found for editing');
+        //     } else {
+        //         console.log('resutl of edit no 1, 2 or 0');
+        //     }
+        // });
+    }
+
+
+}
+
+
+function xhtpEditProjectItem(itemId, cb) {
+
+    const xhtr = new XMLHttpRequest ();
+
+    xhtr.open ('GET', '/edit-project/' + itemId, true);
+    xhtr.setRequestHeader ('Content-type', 'application/json');
+
+    xhtr.send ();
+
+    //
+    // xhtr.onload = function () {
+    //
+    //     // var obj = JSON.parse (xhtr.responseText);
+    //
+    //     if (xhtr.status === 200) {
+    //         return cb ('', obj);
+    //     } else {
+    //         return cb (xhtr.responseText, '');
+    //     }
+    // }
+}
+
+
+
+function deleteProject() {
+
+    if ( overProjectId ) {
+        xhtpDeleteProjectItem (overProjectId, function (err, result) {
+
+            if (err) {console.log ('Errof on xhtpDeleteProjectItem ', err);}
+
+            if (result.status === 1) {
+                // console.log('resutl of delete 1');
+                // getCategoryProjects(0,activeCategoryName)
+                xhtpGetCategoryItems (activeCategoryName, function (err, items) {
+                    if (err) {console.log ('Errof on getCategoryProjects ', err);}
+                    createPortfolioItems(items);
+                    // switchActiveCategory (categoryIndex, categoryName);
+                });
+
+            } else if ( result.status === 2 ) {
+                console.log('user was not logged in');
+                window.location.href = '/login';
+            } else if ( result.status === 0 ){
+                console.log('project not found for deleting');
+            } else {
+                console.log('resutl of delete no 1, 2 or 0');
+            }
+        });
+    }
+}
+
+function xhtpDeleteProjectItem(itemId, cb) {
+
+    const xhtr = new XMLHttpRequest ();
+
+    xhtr.open ('DELETE', '/delete/' + itemId, true);
+    xhtr.setRequestHeader ('Content-type', 'application/json');
+
+    xhtr.send ();
+
+    xhtr.onload = function () {
+
+        var obj = JSON.parse (xhtr.responseText);
+
+        if (xhtr.status === 200) {
+            return cb ('', obj);
+        } else {
+            return cb (xhtr.responseText, '');
+        }
+    }
+}

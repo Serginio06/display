@@ -84,7 +84,7 @@ function loggedIn(status, username) {
     // console.log ('this is loggedIN and status is', status === true);
 
     if (status) {
-        console.log ('status true');
+        // console.log ('status true');
         logedInfo.innerHTML = 'Hi ' + username;
         logedInfo.style.display = 'flex';
         loginElem.value = '';

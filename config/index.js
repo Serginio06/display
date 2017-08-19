@@ -4,8 +4,7 @@ module.exports = {
         port: '3306',
         user: 'root',
         password: '123456',
-        database: 'data',
-        socketPath: '/cloudsql/circular-source-174612:europe-west1:display-db'
+        database: 'data'
     },
     port: process.env.port || 8080,
     google_oAuthClient: {

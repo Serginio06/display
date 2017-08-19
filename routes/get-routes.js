@@ -12,7 +12,7 @@
 module.exports = function (app, pool) {
 
     app.get ('/', function (req, res) {
-console.log('req.session.userName=', req.session.username);
+// console.log('req.session.userName=', req.session.username);
         // var htmlContent = sendFile(path.join(__dirname, '..' , 'views/home.ejs'),function (data) {
         //
         //     var htmlRenderized = ejs.render(data,{filename: 'home.ejs'});
@@ -34,8 +34,14 @@ console.log('req.session.userName=', req.session.username);
     });
 
     app.get ('/edit-project/:id', function (req, res) {
+        console.log('project edit, id=',req.params.id);
+        
+        if ( req.session.username ) {
+            res.render ('new_project',{type:'edit',id:req.params.id, prjTitle:'edit project'});
+        } else {
+            res.redirect('/login');
+        }
 
-        res.render ('new_project',{type:'new',id:'',prjTitle:'add edit project'});
     });
 
     app.get ('/contact', function (req, res) {
