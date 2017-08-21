@@ -187,30 +187,3 @@ function checkPrjSubmitResult(type, msg) {
     }
 
 }
-
-
-// function xhrSubmitNewProject(dataObj, cb) {
-//
-//     const xhr = new XMLHttpRequest ();
-//
-//     xhr.open ('POST', '/upload', true);
-//     xhr.setRequestHeader ('Content-type', 'application/json');
-//
-//     var contentType = "multipart/form-data";
-//     xhr.setRequestHeader("Content-Type", contentType);
-//
-//     xhr.send(dataObj);
-//     // xhtr.send (JSON.stringify (dataObj));
-//
-//     xhr.onload = function () {
-//
-//         var obj = JSON.parse (xhr.responseText);
-//
-//         if (xhr.status === 200) {
-//             return cb ('', obj);
-//         } else {
-//             return cb (obj, '');
-//         }
-//     }
-//
-// }

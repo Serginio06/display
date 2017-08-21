@@ -13,7 +13,8 @@ module.exports = {
         clientSecret: 'bd8rayeX0S2gSN__Ms_5YEcU',
         refreshToken: '1/T6sv6mUCg9NCn8Z4SPMhAeCfzjyyG2wL623GjKiIF9U'
     },
-    adminEmail: 'ivanchenko.s@gmail.com'
+    adminEmail: 'info@dinamicka.com',
+    jwtSecret: 'bd8rayeX0S2gSN__Ms_5YEcU'
 };
 
 

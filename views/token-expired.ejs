@@ -1,27 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <%- include('./head.ejs') %>
-<title>Display. Error</title>
-
+<title>Display. Token expired</title>
 
 <body>
 <%- include('./header.ejs') %>
-<%- include('./login-block.ejs',{title:'Page not found'}) %>
+<%- include('./login-block.ejs',{title:'Token expired'}) %>
+
+
 <div class="contact block__full-width">
     <div class="contact__content block__full-width">
         <div class="error__block block-std">
             <div class="error__block__message-wrapp" role="alert">
                 <!--<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>-->
                 <!--<span class="error__block__message">Page not found.</span>-->
-                <a href="/" class="error__block__message-link"> Go to main page</a>
+                <a href="/" class="error__block__message-link">Go to main page</a> /
+                <a href="/reset-pass" class="error__block__message-link">Password reset</a>
             </div>
         </div>
 
     </div>
 </div>
 
+
 <%- include('./pre-footer.ejs') %>
 <%- include('./footer.ejs') %>
 </body>
 </html>
+
 

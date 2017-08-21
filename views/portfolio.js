@@ -25,7 +25,7 @@ function getCategoryProjects(categoryIndex, categoryName) {
         xhtpGetCategoryItems (categoryName, function (err, items) {
             if (err) {console.log ('Errof on getCategoryProjects ', err);}
             createPortfolioItems (items);
-            switchActiveCategory ( categoryName);
+            switchActiveCategory (categoryName);
         });
     }
 }
@@ -79,7 +79,7 @@ function clearPortfolioItems() {
 
 function getCategoryIndexByName(catName) {
 
-    switch (catName){
+    switch (catName) {
         case "print":
             return 2;
             break;
@@ -98,13 +98,12 @@ function getCategoryIndexByName(catName) {
     }
 
 
-
 }
 
 // function switchActiveCategory(itemIndex, catName) {
-function switchActiveCategory( catName) {
+function switchActiveCategory(catName) {
 
-    itemIndex = getCategoryIndexByName(catName);
+    itemIndex = getCategoryIndexByName (catName);
 
     activeCategoryName = catName;
     var previouseActiveCategoryEl = document.getElementsByClassName ('portfolio__navbar__item-' + activeCategoryIndex.toString ())[0];
@@ -187,20 +186,11 @@ function editProject() {
 
 function infoProject() {
     if (overProjectId) {
-        // window.location.href = '/project-info/' + overProjectId + '/' + activeCategoryIndex + '/' + activeCategoryName;
+        // window.location.href = '/project-info/' + overProjectId + '/' + activeCategoryIndex + '/' +
+        // activeCategoryName;
         window.location.href = '/project-info/' + overProjectId;
     }
 }
-
-//
-// function xhtpEditProjectItem(itemId, cb) {
-//
-//     const xhr = new XMLHttpRequest ();
-//
-//     xhr.open ('GET', '/edit-project/' + itemId, true);
-//     xhr.setRequestHeader ('Content-type', 'application/json');
-//     xhr.send ();
-// }
 
 
 function deleteProject() {

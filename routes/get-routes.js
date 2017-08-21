@@ -3,26 +3,19 @@
  */
 
 
-
-// var htmlContent = fs.readFileSync(__dirname + '/main.ejs', 'utf8');
-// var htmlRenderized = ejs.render(htmlContent, {filename: 'main.ejs', exampleRenderEjs: 'Hello World!'});
-// console.log(htmlRenderized);
-
+let jwtAuth = require ('./../js/jwt_auth');
 
 module.exports = function (app, pool) {
 
     app.get ('/', function (req, res) {
-// console.log('req.session.userName=', req.session.username);
-        // var htmlContent = sendFile(path.join(__dirname, '..' , 'views/home.ejs'),function (data) {
-        //
-        //     var htmlRenderized = ejs.render(data,{filename: 'home.ejs'});
-        //     console.log('htmlRenderized=', htmlRenderized);
-        //
-        // });
-
-
         res.render ('home');
     });
+
+    app.get ('/reset-pass', function (req, res) {
+            res.render ('reset-pass');
+
+    });
+
 
     app.get ('/new-project', function (req, res) {
         if (req.session.username) {
@@ -34,14 +27,11 @@ module.exports = function (app, pool) {
     });
 
     app.get ('/edit-project/:id', function (req, res) {
-        console.log ('project edit, id=', req.params.id);
-
         if (req.session.username) {
             res.render ('new_project', {type: 'edit', id: req.params.id, prjTitle: 'edit project'});
         } else {
             res.redirect ('/login');
         }
-
     });
 
     app.get ('/contact', function (req, res) {
@@ -52,14 +42,9 @@ module.exports = function (app, pool) {
         res.render ('login-page');
     });
 
-    // app.get ('/project-info/:id/:categoryIndex/:categoryName', function (req, res) {
     app.get ('/project-info/:id', function (req, res) {
-        // console.log ('on project-info we received id= %s, catIndex=%s, catname=%s ', req.params.id, req.params.categoryIndex, req.params.categoryName);
-        // res.render('info_project');
         res.render ('inf_project', {
             id: req.params.id,
-            // categoryIndex: req.params.categoryIndex,
-            // categoryName: req.params.categoryName
         });
     });
 
@@ -82,8 +67,6 @@ module.exports = function (app, pool) {
     });
 
     app.get ('/getCategoryItems/:category', function (req, res) {
-        // console.log ('req.params.category= ', req.params.category);
-        // console.log ('req.session.username= ', req.session.username);
 
         let sql = '';
         let values = [];
@@ -104,5 +87,26 @@ module.exports = function (app, pool) {
                 res.status (200).send (result);
             }
         });
-    })
+    });
+
+
+    app.get ('/resetPass/:token', function (req, res) {
+
+        jwtAuth.verifyToken (req.params.token, function (err, userId) {
+            if (err) {
+                console.log ('Error on /resetPass: ', err);
+                if (err.code === 400) {
+                    res.render ('token-expired');
+                } else {
+                    res.render ('error');
+                }
+
+            } else {
+                res.render ('change-pass', {userId: userId})
+            }
+
+
+
+        });
+    });
 };

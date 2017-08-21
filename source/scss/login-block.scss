@@ -1,4 +1,4 @@
-.header__login, .header__login__wrapper, .header__login__block, .header__inputs-wrapper, .header__btn-wrapper, .header__login__alertMsgUp, .header__login__alertMsgDown, .header__login__loged-div {
+.header__login, .header__login__wrapper, .header__login__block, .header__inputs-wrapper, .header__btn-wrapper, .header__login__alertMsgUp, .header__login__alertMsgDown, .header__login__loged-div, .header__login__block-wrapper, .header__login__pass-change-wrapper {
   background-color: $text_color1;
 }
 
@@ -18,13 +18,27 @@
   display: flex;
   align-content: flex-end;
   align-items: flex-end;
-  min-width: 325px;
-  margin-top: 20px;
+  min-width: 320px;
+  margin-top: 5px;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+}
+
+.header__login__block-wrapper{
+  display: flex;
+  align-content: flex-end;
+  align-items: flex-end;
+  //min-width: 325px;
+  //margin-top: 20px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  width: 320px;
 }
 
 .header__login-text {
   background-color: $text_color1;
   min-width: 310px;
+  width: 50%;
 }
 
 .header__login__btn {
@@ -75,15 +89,19 @@
 .header__inputs-wrapper {
   display: flex;
   justify-content: flex-end;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .header__login__alertmsg-wrapper {
   background-color: transparent;
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
 }
 
 
 .header__login__loged-div {
+  display: none;
   color: white;
   font-family: Berlin-Sans-FB;
   font-size: 1.8rem;
@@ -92,27 +110,35 @@
 
 // ========== alert login message =========
 
-#alert-msg{
+.alert-danger{
   color: #a94442;
   background-color: #f2dede;
 }
 
-#info-msg{
+
+.alert-info{
   color: #3c763d;
   background-color: #dff0d8;
 }
 
+//#info-msg{
+//  color: #3c763d;
+//  background-color: #dff0d8;
+//}
+
 .header__login__alertMsgUp, .header__login__alertMsgDown {
-  width: 0;
+  //width: 0;
+  height: 0;
   overflow: hidden;
   font-family: Berlin-Sans-FB;
   font-size: 1.4rem;
   border-radius: 4px;
-  padding-left: 0px;
+  //padding-left: 0px;
   padding-bottom: 0px;
-  height: 0;
-  overflow: hidden;
   //padding: 0 15px;
+  min-width: 300px;
+  overflow: hidden;
+  padding-left: 7px;
   border: 0;
   -webkit-transition: height 0.8s linear;
   -moz-transition: height 0.8s linear;
@@ -122,13 +148,33 @@
 
 
 .header__login__alertMsgDown {
-  width: 300px;
+  width: 100%;
+  //min: 300px;
   height: 20px;
   //padding: 15px 15px;
   border-width: 1px;
-  padding-left: 7px;
+  //padding-left: 7px;
   padding-bottom: 5px;
 }
+
+.header__login__pass-change-wrapper{
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 10px;
+  a {
+    font-size: 1.2rem;
+    background-color: transparent;
+    color: white;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}
+
+
 
 // ================= FOR MOBILE Screens ======================
 @media only screen and (max-width: 686px) {
@@ -144,6 +190,11 @@
     margin: 40px 0;
   }
 
+  .header__login__block{
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
   [class^="header__login__input"] {
     width: 100%;
     font-size: 2rem;
@@ -155,6 +206,7 @@
     padding-bottom: 20px;
     text-align: center;
     font-size: 2.4rem;
+    width: 100%;
   }
 
   .header__login__block {
@@ -169,6 +221,7 @@
     max-width: 400px;
     padding: 0 10px;
     justify-content: center;
+    flex-wrap: wrap;
   }
 
   .header__btn-wrapper {
@@ -179,6 +232,13 @@
     margin-top: 20px;
     padding: 0 10px;
   }
+  .header__login__pass-change-wrapper{
+    justify-content: center;
+  }
 
+  .header__login__alertmsg-wrapper {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 
 }

@@ -1,24 +1,26 @@
 <div class="header__login block__full-width">
     <div class="header__login__wrapper block-std">
         <h1 class="header__login-text uppercase white-text"><%= title %></h1>
-
-        <div class="header__login__block">
+        <div class="header__login__block-wrapper">
             <div class="header__login__alertmsg-wrapper">
-                <div class="alert alert-danger header__login__alertMsgUp" role="alert" id="alert-msg"> som skdjf laskdjf lasdkjflksfj </div>
-                <div class="alert alert-info header__login__alertMsgUp" role="alert" id="info-msg"></div>
+                <div class="alert alert-danger header__login__alertMsgUp" role="alert" id="alert-msg"></div>
+                <!--<div class="alert alert-info header__login__alertMsgUp" role="alert" id="info-msg"></div>-->
             </div>
-            <div class="header__inputs-wrapper">
-                <div class="header__login__loged-div" id="header__login__loged-div"></div>
-                <input type="text" class="header__login__input-username" placeholder="User name" id="loginInput">
-                <input type="text" class="header__login__input-pass" placeholder="Password" id="passInput">
-            </div>
-            <div class="header__btn-wrapper">
-                <button class="header__login__btn uppercase green-text btn_mobile_view" id="header__login__btn" onclick="login()">Log in</button>
-                <!--<button onclick="isUserLogin()">check user login</button>-->
+            <div class="header__login__block">
+                <div class="header__inputs-wrapper">
+                    <div class="header__login__loged-div" id="header__login__loged-div"></div>
+                    <input type="text" class="header__login__input-username" placeholder="User name" id="loginInput">
+                    <input type="password" class="header__login__input-pass" placeholder="Password" id="passInput">
+                </div>
+                <div class="header__btn-wrapper">
+                    <button class="header__login__btn uppercase green-text btn_mobile_view" id="header__login__btn"
+                            onclick="login()">Log in</button>
+                </div>
 
             </div>
-
+            <div class="header__login__pass-change-wrapper" id="header__login__pass-change-wrapper">
+                <a href="/reset-pass">Forgot password?</a>
+            </div>
         </div>
-
     </div>
 </div>

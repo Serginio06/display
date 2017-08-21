@@ -1,12 +1,3 @@
-/**
- * Created by sergiiivanchenko on 07/08/2017.
- */
-
-
-
-// var htmlContent = fs.readFileSync(__dirname + '/main.ejs', 'utf8');
-// var htmlRenderized = ejs.render(htmlContent, {filename: 'main.ejs', exampleRenderEjs: 'Hello World!'});
-// console.log(htmlRenderized);
 
 
 module.exports = function (app, pool) {

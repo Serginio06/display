@@ -155,26 +155,39 @@ h3 {
   align-items: center;
 }
 
-
-
-/// ==========
-.div1 {
-  width: 100%;
-  justify-content: center;
-}
-
-.div2 {
-  max-width: 1200px;
-}
-
-.flex3 {
+.error__block{
+  margin-top: 50px;
   display: flex;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
 }
 
-.item5, .item31 {
+.error__block__message-wrapp{
+  color: #a94442;
+  background-color: #f2dede;
+  overflow: hidden;
+  font-family: Berlin-Sans-FB;
+  font-size: 1.4rem;
+  font-weight: 100;
+  border-radius: 6px;
+  padding: 15px 5px;
+  min-width: 300px;
   display: flex;
-  width: 50%;
-  min-width: 200px; // после чего начинается wrap
+  justify-content: space-around;
+}
+
+.error__block__message{
+  background-color: #f2dede;
+}
+
+.error__block__message-link{
+  color: #a94442;
+  background-color: #f2dede;
+  text-decoration: none;
+}
+
+.error__block__message-link:hover{
+  text-decoration: underline;
 }
 
 @media only screen and (max-width: 1220px) {
@@ -198,5 +211,14 @@ h3 {
     width: 100%!important;
     max-width: 300px;
     margin: 0 10px;
+  }
+
+  .error__block{
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .error__block__message-wrapp{
+    justify-content: center;
   }
 }

@@ -4,7 +4,30 @@ var ejs = require ('ejs');
 var fs = require ('fs');
 var path = require ('path');
 
-function sendEmail(dataObj, cb) {
+
+function sendResetLink(dataObj, cb) {
+    
+    console.log('sendResetLink received: ', dataObj);
+    //=========== send email to user with link to reset pass ==============
+    renderHtml ('resetPassLink', dataObj.userName, dataObj.email, dataObj.subject, dataObj.msg, function (err, html) {
+
+        if (err) { return cb (err, '')}
+
+        sendEmailExecution (html, dataObj.email, dataObj.subject, function (error, response) {
+
+            if (error) {
+                console.log (error);
+                return cb (error, '');
+            } else {
+                console.log ('response emailHandler.sendResetLink =', response);
+                return cb ('', response)
+            }
+        });
+    });
+}
+
+
+function sendContactMessage(dataObj, cb) {
 
     //=========== send confirmation email to user ==============
     renderHtml ('user', dataObj.userName, dataObj.email, dataObj.subject, dataObj.msg, function (err, html) {
@@ -48,6 +71,7 @@ function sendEmail(dataObj, cb) {
     });
 
 }
+
 
 function sendEmailExecution(html, sendTo, emailSubject, cb) {
 
@@ -94,7 +118,6 @@ function sendEmailExecution(html, sendTo, emailSubject, cb) {
     });
 
 
-
 }
 
 
@@ -126,25 +149,31 @@ function getTemplateToRender(filePath, cb) {
 
 function renderHtml(whom, userName, userEmail, subject, msg, cb) {
 
-    if (whom === 'user') {
-        templatePath = path.join (__dirname, '..', 'views/user-email-content.ejs');
-    } else {
-        templatePath = path.join (__dirname, '..', 'views/admin-email-content.ejs');
+    switch (whom) {
+        case 'user':
+            templatePath = path.join (__dirname, '..', 'views/user-email-content.ejs');
+            break;
+        case 'admin':
+            templatePath = path.join (__dirname, '..', 'views/admin-email-content.ejs');
+            break;
+        case 'resetPassLink':
+            templatePath = path.join (__dirname, '..', 'views/resetPassLink-email-content.ejs');
+            break;
+        default:
+            return false;
     }
 
-    // var htmlContent =
     getTemplateToRender (templatePath, function (err, data) {
-        if (err) {
-            cb (err, '');
-        }
+        if (err) {return cb (err, '');}
 
         var htmlRenderized = ejs.render (data, {userName: userName, userEmail: userEmail, subject: subject, msg: msg});
 
-        cb ('', htmlRenderized);
+        return cb ('', htmlRenderized);
     });
 }
 
 
 module.exports = {
-    sendEmail: sendEmail
+    sendContactMessage: sendContactMessage,
+    sendResetLink: sendResetLink
 };

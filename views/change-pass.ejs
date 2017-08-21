@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./head.ejs') %>
+<title>Display. Sign up</title>
+
+
+<body>
+<%- include('./header.ejs') %>
+<%- include('./login-block.ejs',{title:'Sign up to create your own project or Log in'}) %>
+<div class="contact block__full-width">
+    <div class="contact__content block__full-width">
+        <div class="contact__content__form">
+            <div class="contact__content__form-title uppercase">Enter your new password</div>
+            <div class="contact__content__form-subject">
+                <input type="password" class="contact__content__form__input-subject" id="passInput1" placeholder="Password"  onblur="checkPassword(event)">
+                <div class="contact__err__subject" id="contact__err__password">Only latin letters, numbers and . _ - allow. Length more 6 characters</div>
+            </div>
+            <div class="contact__content__form-subject">
+                <input type="password" class="contact__content__form__input-subject" id="passInput2" placeholder="Password"  onblur="isPassEqual()">
+                <div class="contact__err__subject" id="contact__err__password_2">Passwords are not equal</div>
+            </div>
+            <div class="contact__content__btn-wrapper">
+                <button class="contact__content__form__btn-submit uppercase white-text btn_mobile_view" onclick="changePassSubmit('<%= userId%>')">Apply</button>
+                <!--<button class="contact__content__form__btn-submit uppercase white-text btn_mobile_view" onclick="changePassSubmit('3')">Apply</button>-->
+                <!--<button class="contact__content__form__btn-submit uppercase white-text btn_mobile_view" onclick="login()">Log in</button>-->
+                <div class="signup__err__submit" id="signup__err__submit">Please enter login, password and email</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('./pre-footer.ejs') %>
+<%- include('./footer.ejs') %>
+</body>
+</html>

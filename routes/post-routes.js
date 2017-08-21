@@ -4,21 +4,18 @@ var multer = require ('multer');
 var upload = multer ({dest: 'views/uploads/'}).single ('uploadedFile');
 let fs = require ('fs');
 let path = require ('path');
+let jwtAuth = require ('./../js/jwt_auth');
+let dbOperations = require ('./../js/db-operations');
 
 module.exports = function (app, pool) {
 
     app.post ('/registerUser', function (req, res) {
 
-        let hashedPass = passwordHandler.encryptPassword (req.body.pass);
-
-        let sql = 'INSERT INTO users (username, passwordHash, useremail) VALUES(?,?,?)';
-        let values = [req.body.userName, hashedPass, req.body.userEmail];
-
-        pool.query (sql, values, function (err, result) {
+        dbOperations.createNewUser (req.body.userName, req.body.pass, req.body.userEmail, function (err, result) {
 
             if (err) {
                 if (err.code === "ER_DUP_ENTRY") {
-                    // console.log ('Duplicate entry ');
+ // console.log ('Duplicate entry ');
                     let obj = '{"status":2}';
                     res.status (200).send (obj);
                 } else {
@@ -31,6 +28,7 @@ module.exports = function (app, pool) {
                     res.status (200).send (obj);
                 }
             }
+
         });
 
 
@@ -39,17 +37,13 @@ module.exports = function (app, pool) {
 
     app.post ('/userLogin', function (req, res) {
 
-
         if (req.session.username) {
-
             res.status (200).send ('{"status":1,"sessionUserName":"' + req.session.username + '","sessionId":"' + req.session.id + '"}');
         } else {
-
             let query = passwordHandler.checkPassword (req.body.pass);
             let rows = [];
 
             query.on ('error', function () {
-
                 res.status (500).send ('Some error during passwordHash check')
             });
 
@@ -61,13 +55,10 @@ module.exports = function (app, pool) {
 
                 if (rows.length > 0 && rows[0].username === req.body.userName) {
                     req.session.username = rows[0].username;
-                    console.log ('req.session during post:login= ', req.session);
                     res.status (200).send ('{"status":1,"sessionUserName":"' + req.session.username + '","sessionId":"' + req.session.id + '"}');
                 } else {
                     res.status (200).send ('{"status":0}');
                 }
-
-                console.log ('rows = ', rows);
             });
 
         }
@@ -75,7 +66,7 @@ module.exports = function (app, pool) {
 
     app.post ('/send-email', function (req, res) {
 
-        emailHandler.sendEmail (req.body, function (err, response) {
+        emailHandler.sendContactMessage (req.body, function (err, response) {
             if (err) {res.status (500).send ('Email was not sent. Sorry, try again later');}
         });
 
@@ -83,11 +74,89 @@ module.exports = function (app, pool) {
     });
 
 
+    app.post ('/sendResetPassLink', function (req, res) {
+        console.log ('sendResetPassLink received : ', req.body);
+
+        dbOperations.checkLoginEmailExist (req.body.userName, function (err, result) {
+            console.log ('check for user existance in db returned result.length: ', result.length);
+            if (err) {
+                console.log ('error on checkLoginEmailExist= ', err);
+                res.status (500).send ('Internal error. Sorry, try again later');
+            }
+
+            res.setHeader ('Content-type', 'application/json');
+            if (result.length && result.length === 1) {
+// we found user by name or email and need to send link to result.email with token for reset pass
+                console.log ('we found user by name or email and need to send link to result.email with token for reset pass');
+                let obj = '{"status":1}';
+
+                let token = jwtAuth.getToken10 (result[0].id);
+                // let url = '/resetPass' + '?';
+                // var params = "reset_token=" + token;
+                // let resetLink = path.join (req.headers.origin + url + params);
+                let resetLink = path.join (req.headers.origin + '/resetPass/' + token);
+
+                let emailObj = {
+                    userName: result[0].username,
+                    email: result[0].useremail,
+                    subject: 'Display. Reset password request',
+                    msg: resetLink
+                };
+
+                emailHandler.sendResetLink (emailObj, function (err, result) {
+                    if (err) {
+                        console.log (' Error on  emailHandler.sendResetLink.', err);
+                        res.status (500).send ('Email was not sent. Sorry, try again later');
+                    }
+                    res.status (200).send (obj);
+                })
+
+            } else if (result.length && result.length > 1) {
+                console.log ('More then 1 user found by this name');
+                let obj = '{"status":2}';
+                res.status (200).send (obj);
+            } else {
+                console.log ('no user in db ');
+                let obj = '{"status":2}';
+                res.status (200).send (obj);
+            }
+
+        });
+
+
+    });
+
+    app.post ('/passChange', function (req, res) {
+
+        dbOperations.userPassChange (req.body.userid, req.body.pass, function (err, result) {
+
+
+            if (err) {
+                console.log ('err on post /passChange= ', err);
+                res.setHeader ('Content-type', 'application/json');
+                let obj = '{"status":0}';
+                res.status (200).send (obj);
+            } else {
+                if (result && result.affectedRows > 0) {
+                    res.setHeader ('Content-type', 'application/json');
+                    let obj = '{"status":1}';
+                    res.status (200).send (obj);
+                } else {
+                    console.log ('err on post /passChange= ', err);
+                    res.setHeader ('Content-type', 'application/json');
+                    let obj = '{"status":0}';
+                    res.status (200).send (obj);
+                }
+            }
+
+        })
+
+    });
+
+
     app.post ('/userLogOut', function (req, res) {
 
         if (req.session.username && req.session.username !== undefined) {
-            // console.log (' userLogOut Session was active for user ', req.session.username);
-            // req.session.username = '';
             req.session.regenerate (function () {
                 res.status (200).send ('{"status":1,"sessionUserName":"' + req.session.username + '","sessionId":"' + req.session.id + '"}');
             });
@@ -100,8 +169,6 @@ module.exports = function (app, pool) {
 
 
     app.post ('/checkUsername', function (req, res) {
-        // console.log ('CHECK. req.session.username= ', req.session.username);
-        // console.log ('CHECK. req.session.id= ', req.session.id);
 
         if (req.session.username && req.session.username !== undefined) {
             res.status (200).send ('{"status":1,"sessionUserName":"' + req.session.username + '","sessionId":"' + req.session.id + '"}');
@@ -115,12 +182,8 @@ module.exports = function (app, pool) {
     app.post ('/upload', function (req, res) {
 
         upload (req, res, function (err) {
-            if (err) {
-                res.status (500).send ('{"status":"err"}');
-            }
-
-            console.log ('req.file=', req.file);
-            console.log ('req.body=', req.body);
+            if (err) { console.log('err on post /upload: ', err);
+                res.status (500).send ('{"status":"err"}');}
 
             if (req.body.posttype === 'new' || (
                     req.body.posttype === 'edit' && req.file
@@ -136,7 +199,7 @@ module.exports = function (app, pool) {
                 src.on ('end', function () {
                     fs.unlink (req.file.path);
 
-                    addProjectToDB (req.body, fileName, function (err, result) {
+                    dbOperations.addProjectToDB (req.body, fileName, function (err, result) {
 
                         if (err) {
                             console.log ("Error during insering in db: ", err);
@@ -152,7 +215,7 @@ module.exports = function (app, pool) {
                     res.redirect ('/new-project');
                 });
             } else {
-                addProjectToDB (req.body, '', function (err, result) {
+                dbOperations.addProjectToDB (req.body, '', function (err, result) {
                     // console.log('update project without file');
                     if (err) {
                         console.log ("Error during insering in db: ", err);
@@ -164,36 +227,5 @@ module.exports = function (app, pool) {
         });
     });
 
-    function addProjectToDB(formPrjInputsData, fileServerName, cb) {
 
-        let sql='';
-        let values ='';
-        let dataObj = Object.assign (formPrjInputsData, {src: "uploads/" + fileServerName}, {date: new Date ().toJSON ().slice (0, 10)});
-        console.log ('dataObj=', dataObj);
-        let description = dataObj.description.join('');
-
-        if (formPrjInputsData.posttype === 'new' ) {
-             sql = 'INSERT INTO projects ( title, author, description, category, src, date) VALUES ( ?, ?, ?, ?, ?, ?);';
-             values = [dataObj.title, dataObj.author, description, dataObj.category, dataObj.src, dataObj.date];
-        } else if (formPrjInputsData.posttype === 'edit') {
-            if ( fileServerName) {
-                // console.log('create sql with filename for update= ', fileServerName);
-                 sql = 'UPDATE projects SET title=?, author=?, description=?, category=?, src=?, date=? WHERE id=?;';
-                 values = [dataObj.title, dataObj.author, description, dataObj.category, dataObj.src, dataObj.date, formPrjInputsData.editid];
-            } else {
-                // console.log('create sql without filename for update= ', fileServerName);
-                 sql = 'UPDATE projects SET title=?, author=?, description=?, category=?,  date=? WHERE id=?;';
-                 values = [dataObj.title, dataObj.author, description, dataObj.category,  dataObj.date, formPrjInputsData.editid];
-            }
-        }
-        pool.query (sql, values, function (err, result) {
-
-            if (err) {cb ('Error on insert project data to db: ' + err, '')}
-            if (result && result.affectedRows > 0) {
-                cb ('', result)
-            } else {
-                cb ('Result of insert success but not one row was inserted ', '')
-            }
-        });
-    }
 };

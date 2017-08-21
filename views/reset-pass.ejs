@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./head.ejs') %>
+<title>Display. Sign up</title>
+
+
+<body>
+<%- include('./header.ejs') %>
+<%- include('./login-block.ejs',{title:'Password reset'}) %>
+<div class="contact block__full-width">
+
+    <div class="contact__content block__full-width">
+        <div class="contact__content__form">
+            <div class="contact__content__form-title uppercase">Reset password for</div>
+            <div class="contact__content__form-name">
+                <input type="text" class="contact__content__form__input-name" id="resetInput" placeholder="Enter your login or Email" >
+                <div class="contact__err__name" id="contact__err__name">Only latin letters allow</div>
+            </div>
+            <div class="contact__content__btn-wrapper">
+                <button class="contact__content__form__btn-submit uppercase white-text btn_mobile_view" onclick="resetPass()">Send</button>
+                <!--<button class="contact__content__form__btn-submit uppercase white-text btn_mobile_view" onclick="login()">Log in</button>-->
+                <div class="signup__err__submit" id="signup__err__submit">Please enter login, password and email</div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+<%- include('./pre-footer.ejs') %>
+<%- include('./footer.ejs') %>
+</body>
+</html>
